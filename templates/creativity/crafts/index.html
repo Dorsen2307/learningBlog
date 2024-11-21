@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block header %}<h1>Музей поделок</h1>{% endblock %}
+
+{% block content %}
+    <div class="content-about">
+    {% if crafts_list %}
+        <div class="row">
+            {% for crafts in crafts_list %}
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-6 mb-5 ">
+                <div class="card">
+                    <a href="{% url 'crafts:craft_detail' crafts.id %}">
+                        <img src="{{ crafts.image.image.url }}" class="card-img-top" alt="{{ crafts.name }}">
+                    </a>
+                    <h3 class="card-title ps-2">{{ crafts.name }}</h3>
+                </div>
+                <div class="card-body bg-info ps-2 rounded-bottom-2">
+                    <span class="card-subtitle">
+                        {% if crafts.date_crafting %}
+                            Дата изготовления: {{ crafts.date_crafting }}<br>
+                        {% else %}
+                            Дата изготовления: Неизвестно<br>
+                        {% endif %}
+                            Дата публикации: {{ crafts.date_published }}<br>
+                    </span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="about-text">Этот раздел пока в разработке!</p>
+    {% endif %}
+    </div>
+{% endblock %}

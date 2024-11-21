@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ crafts.name }}{% endblock %}
+
+{% block image %}
+    <div class="block-last">
+        <a class="last" href="{% url 'crafts:index' %}"><-- Назад</a>
+    </div>
+    <div class="row">
+        <img class="img-drawing col-12 p-0" src="{{ crafts.image.image.url }}" alt="{{ crafts.name }}">
+    </div>
+{% endblock %}
+
+{% block header %}
+    <h1 class="text-center mt-5">{{ crafts.name }}</h1>
+{% endblock %}
+
+{% block content %}
+    <p class="text-full">{{ crafts.text }}</p>
+    {% if crafts.date_crafting %}
+        <span class="card-subtitle d-block text-end">Дата изготовления: {{ crafts.date_crafting }}</span>
+    {% else %}
+        <span class="card-subtitle d-block text-end">Дата изготовления: неизвестно</span>
+    {% endif %}
+    <span class="card-subtitle d-block text-end">Дата публикации: {{ crafts.date_published }}</span>
+    
+    {% include 'comments/comments.html' with comments=comments form=form %}
+{% endblock %}
+
+

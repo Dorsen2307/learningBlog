@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block header %}<h1>Обо мне</h1>{% endblock %}
+
+
+{% block image %}
+    <div class="content-about">
+    {% if photo %}
+        <img class="img-thumbnail" src="{{ photo }}" alt="">
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+        <p class="about-text">{{ content|safe }}</p>
+    </div>
+{% endblock %}

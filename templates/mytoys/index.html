@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block header %}<h1>Мои любимые игрушки</h1>{% endblock %}
+
+{% block content %}
+    <div class="content-about">
+    {% if my_toys_list %}
+        {% for my_toys in my_toys_list %}
+            <div class="content-line row position-relative">
+                <div class="col-xxl-3 col-xl-3 col-lg-3 col-4 image-toys">
+                    <img src="{{ my_toys.image.image.url }}" alt="Фото">
+                </div>
+                <div class="col-xxl-9 col-xl-9 col-lg-9 col-8 content-details">
+                    <h3 class="name">
+                        <a href="toys/{{ my_toys.id }}/">{{ my_toys.name }}</a>
+                    </h3>
+                    <p class="text">{{ my_toys.text }}</p>
+                    <span class="date-published">Дата публикации: {{ my_toys.date_published }}</span>
+                </div>
+                {% if my_toys.is_recent %}
+                    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" style="width: 12px;height: 12px;"></span>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="about-text">Этот раздел пока в разработке!</p>
+    {% endif %}
+    </div>
+{% endblock %}
