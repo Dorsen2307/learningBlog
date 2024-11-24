@@ -518,7 +518,7 @@
 				var list = dom.create(targetListType), li;
 
 				function adjustIndentForNewList(element) {
-					// If there's a margin-left, outdent one level to account for the extra list margin.
+					// If there's a margin-left, outdent one level to accounts for the extra list margin.
 					if (element.style.marginLeft || element.style.paddingLeft) {
 						t.adjustPaddingFunction(false)(element);
 					}

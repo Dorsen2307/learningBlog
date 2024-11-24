@@ -26,6 +26,8 @@ urlpatterns = [
     path('crafts/', include('crafts.urls')),
     path('lifehacks/', include('lifehacks.urls')),
     path('like/<str:app_label>/<str:model_name>/<int:object_id>/', include('like.urls')),
-    path('grappelli/', include('grappelli.urls')),
+    # path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('accounts.urls')),
 ]

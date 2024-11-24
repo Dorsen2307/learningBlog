@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'grappelli.apps.GrappelliConfig',
+    # 'grappelli.apps.GrappelliConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'crafts.apps.CraftsConfig',
     'lifehacks.apps.LifehacksConfig',
     'like.apps.LikeConfig',
-    'account.apps.AccountConfig'
+    'accounts.apps.AccountConfig',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
@@ -70,7 +71,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
+                # 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
@@ -137,3 +138,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'about:index'
+LOGOUT_REDIRECT_URL = 'about:index'
