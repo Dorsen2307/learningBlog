@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'lifehacks.apps.LifehacksConfig',
     'like.apps.LikeConfig',
     'accounts.apps.AccountConfig',
-    'widget_tweaks'
+    'widget_tweaks',
+    'activities.apps.ActivityConfig'
 ]
 
 MIDDLEWARE = [
@@ -65,8 +66,7 @@ ROOT_URLCONF = 'learningProjectBlog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(PROJECT_ROOT, '../templates'), ]
-        ,
+        'DIRS': [os.path.join(PROJECT_ROOT, '../templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

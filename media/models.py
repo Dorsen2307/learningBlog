@@ -8,7 +8,7 @@ class Image(models.Model):
         ('drawings', 'Рисунки'),
         ('crafts', 'Поделки'),
         ('lifehacks', 'Lifehacks'),
-        ('activity', 'Активности'),
+        ('activities', 'Активности'),
         ('poet', 'Поэт'),
     ]
 

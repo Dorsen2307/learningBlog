@@ -75,7 +75,7 @@ nav ul ul li {
 }
 nav ul ul li a {
   white-space: nowrap;
-  line-height: 2;
+  /*line-height: 2;*/
   padding: 4px 10px;
 }
 nav a {

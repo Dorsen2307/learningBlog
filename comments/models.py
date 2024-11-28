@@ -1,7 +1,7 @@
 from django.db import models
 
 # from poet.models import Poet
-# from activity.models import Activity
+from activities.models import Activities
 from lifehacks.models import Lifehacks
 from crafts.models import Crafts
 from drawings.models import Drawings
@@ -13,7 +13,7 @@ class Comment(models.Model):
     drawing = models.ForeignKey(Drawings, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
     crafts = models.ForeignKey(Crafts, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
     lifehacks = models.ForeignKey(Lifehacks, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
-    # activity = models.ForeignKey(Activity, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
+    activities = models.ForeignKey(Activities, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
     # poet = models.ForeignKey(Poet, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
     name = models.CharField(max_length=100, verbose_name='Имя')
     content = models.TextField(verbose_name='Текст')

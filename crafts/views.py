@@ -18,7 +18,7 @@ def craft_detail(request, craft_id):
             comment = form.save(commit=False)
             comment.craft = crafts
             comment.save()
-            return redirect('crafts:craft_detail', toy_id=crafts.id)
+            return redirect('crafts:craft_detail', crafts_id=crafts.id)
     else:
         form = CommentForm()
 

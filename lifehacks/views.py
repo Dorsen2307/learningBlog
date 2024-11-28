@@ -17,7 +17,7 @@ def lifehack_detail(request, lifehack_id):
             comment = form.save(commit=False)
             comment.lifehack = lifehacks
             comment.save()
-            return redirect('lifehacks:lifehack_detail', toy_id=lifehacks.id)
+            return redirect('lifehacks:lifehack_detail', lifehacks_id=lifehacks.id)
     else:
         form = CommentForm()
 

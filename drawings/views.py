@@ -25,7 +25,7 @@ def drawing_detail(request, drawing_id):
             comment = form.save(commit=False)
             comment.drawing = drawings
             comment.save()
-            return redirect('drawings:drawing_detail', toy_id=drawings.id)
+            return redirect('drawings:drawing_detail', drawings_id=drawings.id)
     else:
         form = CommentForm()
 

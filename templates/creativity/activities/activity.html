@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ activities.name }}{% endblock %}
+
+{% block image %}
+    <div class="block-last">
+        <a class="last" href="{% url 'activities:index' %}"><-- Назад</a>
+    </div>
+    <img class="img-toys" src="{{ activities.image.image.url }}" alt="">
+{% endblock %}
+
+{% block header %}
+    <h1>{{ activities.name }}</h1>
+{% endblock %}
+
+{% block content %}
+    <p class="text-full">{{ activities.text }}</p>
+    <div class="d-flex justify-content-between">
+        <span class="date-published">Дата публикации: {{ activities.date_published }}</span>
+        
+        <div class="like-container">
+          <a href="" class="like" data-model-name="toys" data-object-id="{{ activities.id }}">
+              <img src="{% static 'img/content/like.png' %}" alt="Лайк">
+          </a>
+          <span class="likes-count">{{ activities.like_set.count }}</span>
+        </div>
+    </div>
+    
+    {% include 'comments/comments.html' with comments=comments form=form %}
+{% endblock %}
+
+
