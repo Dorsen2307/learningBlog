@@ -11,6 +11,9 @@
                 <div class="card">
                     <a href="{% url 'lifehacks:lifehack_detail' lifehacks.id %}">
                         <img src="{{ lifehacks.image.image.url }}" class="card-img-top" alt="{{ lifehacks.name }}">
+                        {% if lifehacks.is_recent %}
+                            <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                        {% endif %}
                     </a>
                     <h3 class="card-title ps-2">{{ lifehacks.name }}</h3>
                 </div>

@@ -200,7 +200,6 @@ footer p a {
 
 /* My Toys */
 .content-line {
-    height: 200px;
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -256,7 +255,7 @@ footer p a {
 }
 
 .date-published {
-    font-size: 1.9rem;
+    font-size: 1.2rem;
     color: #888;
     margin-top: auto;
 }
@@ -303,23 +302,46 @@ footer p a {
 
 .comment li {
     font-size: 1.7rem;
-    background: #b5b6b7;
+    background: white;
     margin: 10px;
+    border-radius: 0 5px 5px 5px;
 }
 
-.comment .date {
+.comment-date {
     font-style: italic;
     font-size: 1rem;
+    font-weight: normal;
 }
 
 .comment h3 {
-    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 2px solid #0b5ed7;
 }
 
-.form-name, .form-comment{
+.comment h2 {
+    padding-top: 20px;
+}
+
+.comment-name {
+    font-weight: bold;
+    background: #b7e28c;
+    padding: 5px;
+    border-radius: 0 5px 0 0;
+}
+
+.comment-content {
+    padding: 5px;
+}
+
+.form-name, .form-comment {
     width: 500px;
     margin-bottom: 10px;
     font-size: 1.5rem;
+    border-radius: 3px;
+}
+
+.form-comment {
+    height: 100px;
 }
 
 .form-btn {
@@ -351,3 +373,8 @@ footer p a {
   font-size: 3rem;
 }
 
+@media (max-width: 991.5px) {
+    nav {
+        margin-top: 15px;
+    }
+}

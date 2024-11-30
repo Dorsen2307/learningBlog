@@ -48,7 +48,10 @@ INSTALLED_APPS = [
     'like.apps.LikeConfig',
     'accounts.apps.AccountConfig',
     'widget_tweaks',
-    'activities.apps.ActivityConfig'
+    'activities.apps.ActivityConfig',
+    'poets.apps.PoetsConfig',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -141,3 +144,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'about:index'
 LOGOUT_REDIRECT_URL = 'about:index'
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+# CKEDITOR_CONFIGS = {
+#     'default': {
+#         'toolbar': 'Custom',
+#         'toolbar_Custom': [
+#             ['Bold', 'Italic', 'Underline'],
+#             ['Link', 'Unlink'],
+#             ['Image', 'Table', 'HorizontalRule'],
+#             ['Source'],
+#         ],
+#         'height': 300,
+#         'width': '100%',
+#     },
+# }

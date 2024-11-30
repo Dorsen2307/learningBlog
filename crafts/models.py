@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.db import models
 from django.utils import timezone
 from media.models import Image
@@ -6,7 +7,7 @@ from media.models import Image
 class Crafts(models.Model):
     image = models.ForeignKey(Image, on_delete=models.SET_NULL, null=True, blank=True,verbose_name='Изображение')
     name = models.CharField(max_length=50, null=True, blank=True,verbose_name='Название')
-    text = models.TextField(null=True, blank=True,verbose_name='Текст')
+    content = RichTextField(null=True, blank=True, verbose_name='Текст')
     is_published = models.BooleanField(default=False, verbose_name='Опубликовано?')
     date_crafting = models.DateField(null=True, blank=True, verbose_name='Дата изготовления')
     date_created = models.DateTimeField(auto_now_add=True, null=True, verbose_name='Дата создания')

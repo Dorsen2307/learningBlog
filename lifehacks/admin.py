@@ -17,7 +17,7 @@ class LifehacksAdmin(admin.ModelAdmin):
     ordering = ('name',)
     fields = ('image',
               'name',
-              'text',
+              'content',
               'is_published',
               'date_lifehack',
               'image_preview',
@@ -31,7 +31,7 @@ class LifehacksAdmin(admin.ModelAdmin):
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def text_preview(self, obj):
-        return obj.text[:50] + '...' if len(obj.text) > 50 else obj.text
+        return obj.content[:50] + '...' if len(obj.content) > 50 else obj.content
     text_preview.short_description = 'Текст'
 
     def image_preview(self, obj):

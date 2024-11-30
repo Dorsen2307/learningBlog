@@ -14,8 +14,8 @@
                     <h3 class="name">
                         <a href="toys/{{ my_toys.id }}/">{{ my_toys.name }}</a>
                     </h3>
-                    <p class="text">{{ my_toys.text }}</p>
-                    <span class="date-published">Дата публикации: {{ my_toys.date_published }}</span>
+                    <p class="text">{{ my_toys.content }}</p>
+                    <span class="date-published text-end">Дата публикации: {{ my_toys.date_published }}</span>
                 </div>
                 {% if my_toys.is_recent %}
                     <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" style="width: 12px;height: 12px;"></span>

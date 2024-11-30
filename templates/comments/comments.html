@@ -1,16 +1,4 @@
 <div class="comment mt-5">
-    <h2>Комментарии</h2>
-    <ul>
-        {% for comment in comments %}
-            <li>
-                <strong>{{ comment.name }}:</strong> {{ comment.content }}
-                <span class="date"> ({{ comment.created_at }})</span>
-            </li>
-        {% empty %}
-            <li>Нет комментариев.</li>
-        {% endfor %}
-    </ul>
-    
     <h3>Добавить комментарий</h3>
     <form method="post">
         {% csrf_token %}
@@ -18,4 +6,22 @@
         {{ form.content }}<br>
         <button type="submit" class="form-btn btn btn-primary">Отправить</button>
     </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-info">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <h2>Комментарии</h2>
+    <ul>
+        {% for comment in comments %}
+            <li>
+                <p class="comment-name">{{ comment.name }} <span class="comment-date"> ({{ comment.created_at }})</span></p>
+                <p class="comment-content">{{ comment.content }}</p>
+            </li>
+        {% empty %}
+            <li>Нет комментариев.</li>
+        {% endfor %}
+    </ul>
 </div>

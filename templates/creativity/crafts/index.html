@@ -11,6 +11,9 @@
                 <div class="card">
                     <a href="{% url 'crafts:craft_detail' crafts.id %}">
                         <img src="{{ crafts.image.image.url }}" class="card-img-top" alt="{{ crafts.name }}">
+                        {% if crafts.is_recent %}
+                            <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                        {% endif %}
                     </a>
                     <h3 class="card-title ps-2">{{ crafts.name }}</h3>
                 </div>

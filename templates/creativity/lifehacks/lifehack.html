@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block content %}
-    <p class="text-full">{{ lifehacks.text }}</p>
+    <div class="text-full">{{ lifehacks.content|safe }}</div>
     {% if crafts.date_crafting %}
         <span class="card-subtitle d-block text-end">Дата изготовления: {{ lifehacks.date_lifehack }}</span>
     {% else %}

@@ -15,19 +15,19 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Drawings',
+            name='Poets',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(blank=True, max_length=50, null=True, verbose_name='Название')),
                 ('content', ckeditor.fields.RichTextField(blank=True, null=True, verbose_name='Текст')),
                 ('is_published', models.BooleanField(default=False, verbose_name='Опубликовано?')),
-                ('date_painting', models.DateField(blank=True, null=True, verbose_name='Дата рисования')),
+                ('date_poets', models.DateField(blank=True, null=True, verbose_name='Дата изготовления')),
                 ('date_created', models.DateTimeField(auto_now_add=True, null=True, verbose_name='Дата создания')),
                 ('date_published', models.DateField(blank=True, null=True, verbose_name='Дата публикации')),
                 ('image', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='media.image', verbose_name='Изображение')),
             ],
             options={
-                'verbose_name_plural': 'Рисунки',
+                'verbose_name_plural': 'Стихи',
             },
         ),
     ]

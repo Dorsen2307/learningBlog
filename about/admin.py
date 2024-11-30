@@ -7,7 +7,7 @@ from .models import About, Image
 class AboutAdmin(admin.ModelAdmin):
     list_display = ('data_creat', 'is_active', 'text_preview')
     list_editable = ('is_active',)
-    fields = ('image', 'text', 'is_active')
+    fields = ('image', 'content', 'is_active')
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.is_relation and db_field.related_model == Image:
@@ -20,7 +20,7 @@ class AboutAdmin(admin.ModelAdmin):
     data_creat.short_description = 'Дата создания'
 
     def text_preview(self, obj):
-        return obj.text[:100] + '...' if len(obj.text) > 100 else obj.text
+        return obj.content[:100] + '...' if len(obj.content) > 100 else obj.content
     text_preview.short_description = 'Предпросмотр'
 
     def is_active(self, obj):

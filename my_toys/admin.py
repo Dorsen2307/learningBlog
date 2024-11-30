@@ -7,7 +7,7 @@ class MyToysAdmin(admin.ModelAdmin):
     list_display = ('name', 'text_preview', 'image_preview_list', 'date_created', 'date_published', 'is_published')
     list_editable = ('is_published',)
     ordering = ('name',)
-    fields = ('image', 'name', 'text', 'is_published', 'image_preview',)
+    fields = ('image', 'name', 'content', 'is_published', 'image_preview',)
     readonly_fields = ('image_preview', 'image_preview_list',)
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
@@ -17,7 +17,7 @@ class MyToysAdmin(admin.ModelAdmin):
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def text_preview(self, obj):
-        return obj.text[:50] + '...' if len(obj.text) > 50 else obj.text
+        return obj.content[:50] + '...' if len(obj.content) > 50 else obj.content
     text_preview.short_description = 'Текст'
 
     def image_preview(self, obj):

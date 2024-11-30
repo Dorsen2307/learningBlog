@@ -39,7 +39,10 @@ nav ul {
   position: relative;
 }
 nav ul li {
-  display: inline-block;
+  /*display: inline-block;*/
+}
+nav ul li a {
+    display: inline-block;
 }
 nav ul li:hover > ul {
   z-index: 10;
@@ -72,7 +75,7 @@ nav ul ul li {
 }
 nav ul ul li a {
   white-space: nowrap;
-  line-height: 2;
+  /*line-height: 2;*/
   padding: 4px 10px;
 }
 nav a {
@@ -84,12 +87,45 @@ nav a {
   text-transform: uppercase;
   text-decoration: none;
   font-weight: bold;
-  line-height: 3.5;
+  /*line-height: 3.5;*/
   color: #000000;
 }
 a:hover {
   background: #afaa;
 }
+.logout {
+    text-align: center;
+}
+.logout a, span{
+    padding: 0;
+    border: none;
+    background: none;
+    line-height: 1;
+}
+.login {
+    text-align: center;
+}
+.login a {
+    padding: 0;
+    border: none;
+    background: none;
+    line-height: 1;
+}
+.logout span {
+    background: #afeeee;
+    border-radius: 3px;
+    padding: 0 5px;
+}
+.logout a, .login a {
+    text-transform: none;
+    color: #0b5ed7;
+}
+.no-line {
+    outline: none;
+}
+
+
+
 /* Main */
 .main {
   background: url(../img/main/bg.jpg) center bottom no-repeat;
@@ -158,11 +194,12 @@ footer p a {
   color: #000;
   font-weight: bold;
 }
-
+.container {
+    min-width: 728px;
+}
 
 /* My Toys */
 .content-line {
-    height: 200px;
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -218,13 +255,18 @@ footer p a {
 }
 
 .date-published {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     color: #888;
     margin-top: auto;
 }
 
 /* Toy details */
 .img-toys {
+    border-radius: 5px;
+    border: white solid 2px;
+}
+
+.img-drawing {
     border-radius: 5px;
     border: white solid 2px;
 }
@@ -260,25 +302,74 @@ footer p a {
 
 .comment li {
     font-size: 1.7rem;
-    background: #b5b6b7;
+    background: white;
     margin: 10px;
+    border-radius: 0 5px 5px 5px;
 }
 
-.comment .date {
+.comment-date {
     font-style: italic;
     font-size: 1rem;
+    font-weight: normal;
 }
 
 .comment h3 {
-    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 2px solid #0b5ed7;
 }
 
-.form-name, .form-comment{
+.comment h2 {
+    padding-top: 20px;
+}
+
+.comment-name {
+    font-weight: bold;
+    background: #b7e28c;
+    padding: 5px;
+    border-radius: 0 5px 0 0;
+}
+
+.comment-content {
+    padding: 5px;
+}
+
+.form-name, .form-comment {
     width: 500px;
     margin-bottom: 10px;
     font-size: 1.5rem;
+    border-radius: 3px;
+}
+
+.form-comment {
+    height: 100px;
 }
 
 .form-btn {
     font-size: 1.5rem;
 }
+
+/* Like */
+.like-container {
+  display: flex;
+  align-items: center;
+}
+
+.like {
+    font-size: 3rem;
+    margin-right: 10px;
+    transition: all .3s ease-in-out;
+}
+
+.like:hover {
+    background: none;
+    transform: scale(1.1);
+}
+
+.like img {
+    height: 70px;
+}
+
+.likes-count {
+  font-size: 3rem;
+}
+

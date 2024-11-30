@@ -20,12 +20,14 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     path('', RedirectView.as_view(url='about/', permanent=True)),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('about/', include('about.urls')),
     path('my-toys/', include('my_toys.urls')),
     path('drawings/', include('drawings.urls')),
     path('crafts/', include('crafts.urls')),
     path('lifehacks/', include('lifehacks.urls')),
     path('activities/', include('activities.urls')),
+    path('poets/', include('poets.urls')),
     path('like/<str:app_label>/<str:model_name>/<int:object_id>/', include('like.urls')),
     # path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),

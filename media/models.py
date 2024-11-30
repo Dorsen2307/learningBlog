@@ -9,7 +9,7 @@ class Image(models.Model):
         ('crafts', 'Поделки'),
         ('lifehacks', 'Lifehacks'),
         ('activities', 'Активности'),
-        ('poet', 'Поэт'),
+        ('poets', 'Поэт'),
     ]
 
     def get_upload_to(self, filename):
