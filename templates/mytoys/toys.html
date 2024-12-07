@@ -1,28 +1,28 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}{{ my_toys.name }}{% endblock %}
+{% block title %}{{ item.name }}{% endblock %}
 
 {% block image %}
     <div class="block-last">
         <a class="last" href="{% url 'my_toys:index' %}"><-- Назад</a>
     </div>
-    <img class="img-toys" src="{{ my_toys.image.image.url }}" alt="">
+    <img class="img-toys" src="{{ item.image.image.url }}" alt="">
 {% endblock %}
 
 {% block header %}
-    <h1>{{ my_toys.name }}</h1>
+    <h1>{{ item.name }}</h1>
 {% endblock %}
 
 {% block content %}
-    <div class="text-full">{{ my_toys.content|safe }}</div>
+    <div class="text-full">{{ item.content|safe }}</div>
     <div class="d-flex justify-content-between">
-        <span class="date-published">Дата публикации: {{ my_toys.date_published }}</span>
+        <span class="date-published">Дата публикации: {{ item.date_published }}</span>
         
         <div class="like-container">
-          <a href="" class="like" data-model-name="toys" data-object-id="{{ my_toys.id }}">
+          <a href="" class="like" data-model-name="toys" data-object-id="{{ item.id }}">
               <img src="{% static 'img/content/like.png' %}" alt="Лайк">
           </a>
-          <span class="likes-count">{{ my_toys.like_set.count }}</span>
+          <span class="likes-count">{{ item.like_set.count }}</span>
         </div>
     </div>
     

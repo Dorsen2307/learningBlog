@@ -2,7 +2,11 @@
     <h3>Добавить комментарий</h3>
     <form method="post">
         {% csrf_token %}
-        {{ form.name }}<br>
+        {% if is_authenticated %}
+            <p class="fs-3">Имя: <span class="fw-bold">{{ request.user.username }}</span></p>
+        {% else %}
+            {{ form.name }}<br>
+        {% endif %}
         {{ form.content }}<br>
         <button type="submit" class="form-btn btn btn-primary">Отправить</button>
     </form>

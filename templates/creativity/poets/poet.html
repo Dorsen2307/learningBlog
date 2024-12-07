@@ -4,7 +4,7 @@
 
 {% block image %}
     <div class="block-last">
-        <a class="last" href="{% url 'activities:index' %}"><-- Назад</a>
+        <a class="last" href="{% url 'poets:index' %}"><-- Назад</a>
     </div>
     <img class="img-toys" src="{{ item.image.image.url }}" alt="">
 {% endblock %}
@@ -14,19 +14,17 @@
 {% endblock %}
 
 {% block content %}
-    <p class="text-full">{{ item.content }}</p>
+    <p class="text-full">{{ item.text }}</p>
     <div class="d-flex justify-content-between">
         <span class="date-published">Дата публикации: {{ item.date_published }}</span>
         
-        <div class="d-flex align-items-center">
-          <a href="#" id="like-button" class="btn btn-outline-primary me-2" data-liked="false">
+        <div class="like-container">
+          <a href="" class="like" data-model-name="toys" data-object-id="{{ item.id }}">
               <img src="{% static 'img/content/like.png' %}" alt="Лайк">
           </a>
-          <span id="like-count" class="badge bg-secondary">{{ item.like_set.count }}</span>
+          <span class="likes-count">{{ item.like_set.count }}</span>
         </div>
     </div>
     
     {% include 'comments/comments.html' with comments=comments form=form %}
 {% endblock %}
-
-

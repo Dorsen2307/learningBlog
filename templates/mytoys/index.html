@@ -4,18 +4,18 @@
 
 {% block content %}
     <div class="content-about">
-    {% if my_toys_list %}
-        {% for my_toys in my_toys_list %}
+    {% if item_list %}
+        {% for item in item_list %}
             <div class="content-line row position-relative">
                 <div class="col-xxl-3 col-xl-3 col-lg-3 col-4 image-toys">
-                    <img src="{{ my_toys.image.image.url }}" alt="Фото">
+                    <a href="toys/{{ item.id }}/"><img src="{{ item.image.image.url }}" alt="Фото"></a>
                 </div>
                 <div class="col-xxl-9 col-xl-9 col-lg-9 col-8 content-details">
                     <h3 class="name">
-                        <a href="toys/{{ my_toys.id }}/">{{ my_toys.name }}</a>
+                        <a class="p-1 border" href="toys/{{ item.id }}/">{{ item.name }}</a>
                     </h3>
-                    <p class="text">{{ my_toys.content }}</p>
-                    <span class="date-published text-end">Дата публикации: {{ my_toys.date_published }}</span>
+                    <p class="text">{{ item.content }}</p>
+                    <span class="date-published text-end">Дата публикации: {{ item.date_published }}</span>
                 </div>
                 {% if my_toys.is_recent %}
                     <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" style="width: 12px;height: 12px;"></span>

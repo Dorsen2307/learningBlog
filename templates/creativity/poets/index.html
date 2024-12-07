@@ -3,37 +3,53 @@
 {% block header %}<h1>Мои стишки</h1>{% endblock %}
 
 {% block content %}
-{#    <div class="content-about">#}
-    {% if poets_list %}
-        {% for poets in poets_list %}
+    {% if item_list %}
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+        {% for item in item_list %}
             
-            <div class="content-line position-relative">
-                <h3 class="name">
-                    <a href="#collapseExample" data-bs-toggle="collapse" role="button">{{ poets.name }}</a>
+            <div class="accordion-item position-relative">
+                <h3 class="accordion-header name">
+                    <a href="#{{ item.id }}" 
+                       class="accordion-button collapsed" 
+                       data-bs-toggle="collapse" 
+                       data-bs-target="#collapse{{ item.id }}" 
+                       aria-expanded="false" 
+                       aria-controls="collapse{{ item.id }}"
+                       role="button">{{ item.name }}
+                    </a>
                 </h3>
             
-                <div class="card card-body collapse" id="collapseExample">
-                    <div class="row h-100">
-                        <div class="col-xxl-3 col-xl-3 col-lg-3 col-4">
-                            <img class="img-fluid" src="{{ poets.image.image.url }}" alt="Фото">
-                        </div>
-                        <div class="offset-1 col d-flex flex-column">
-                            <div class="flex-grow-1 fs-3">
-                                {{ poets.content|safe }}<br>
+                <div class="accordion-collapse collapse" 
+                     id="collapse{{ item.id }}" 
+                     data-bs-parent="#accordionFlushExample"
+                >
+                    <div class="accordion-body">
+                        <div class="row h-100">
+                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-4">
+                                {% if item.image.image.url %}
+                                    <img class="img-fluid" src="{{ item.image.image.url }}" alt="Фото">
+                                {% else %}
+                                    <p class="d-flex justify-content-center align-items-center h-100">Фото отсутствует</p>
+                                {% endif %}
                             </div>
-                            <span class="date-published text-end">Дата публикации: {{ poets.date_published }}</span>
+                            <div class="offset-1 col d-flex flex-column">
+                                <div class="flex-grow-1 fs-3" style="font-family: 'Actay-Reg', serif">
+                                    {{ item.content|safe }}<br>
+                                </div>
+                                <span class="date-published text-end">Дата публикации: {{ item.date_published }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             
-                {% if poets.is_recent %}
-                    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" style="width: 12px;height: 12px;"></span>
+                {% if item.is_recent %}
+                    <span class="position-absolute z-1 top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" style="width: 12px;height: 12px;"></span>
                 {% endif %}
             </div>
-            
+
         {% endfor %}
+        </div>
     {% else %}
         <p class="about-text">Этот раздел пока в разработке!</p>
     {% endif %}
-{#    </div>#}
 {% endblock %}

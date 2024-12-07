@@ -1,28 +1,33 @@
-/**
- * @typedef {Object} LikeResponse
- * @property {number} likes_count
- */
+document.addEventListener('DOMContentLoaded', function() {
+    const likeButton = document.getElementById('like-button');
+    const likeCount = document.getElementById('like-count');
+    let liked = likeButton.getAttribute('data-liked') === 'true';
 
-/**
- * @type {HTMLElement[]} */
-document.querySelectorAll('.like').forEach(link => {
-    link.addEventListener('click', function(event) {
+    likeButton.addEventListener('click', function(event) {
         event.preventDefault();
-        const appLabel = this.getAttribute('data-app-label');
-        const modelName = this.getAttribute('data-model-name');
-        const objectId = this.getAttribute('data-object-id');
+        if (!isAuthenticated) {
+            alert('Пожалуйста, авторизуйтесь, чтобы ставить лайки.');
+            return;
+        }
 
-        fetch(`/like/${modelName}/${objectId}/`, {
+        liked = !liked;
+        likeButton.setAttribute('data-liked', liked);
+
+        fetch('/like/', {
             method: 'POST',
             headers: {
-                'X-CSRFToken': '{{ csrf_token }}',
                 'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
             },
+            body: JSON.stringify({
+                content_type: likeButton.getAttribute('data-content-type'),
+                object_id: likeButton.getAttribute('data-object-id')
+            })
         })
         .then(response => response.json())
-        .then((/** @type {LikeResponse} */ data) => {
-            // Обновляем количество лайков на странице
-            this.nextElementSibling.textContent = data.likes_count;
+        .then(data => {
+            console.log('Response data:', data);
+            likeCount.textContent = data.like_count;
         })
         .catch(error => console.error('Ошибка:', error));
     });
