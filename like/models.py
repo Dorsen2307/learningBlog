@@ -14,3 +14,4 @@ class Like(models.Model):
 
     class Meta:
         unique_together = ('user', 'content_type', 'object_id')
+        verbose_name_plural = 'Лайки'

@@ -1,34 +1,55 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const likeButton = document.getElementById('like-button');
-    const likeCount = document.getElementById('like-count');
-    let liked = likeButton.getAttribute('data-liked') === 'true';
+$(document).ready(function() {
+    var $likeButton = $('#like-button');
 
-    likeButton.addEventListener('click', function(event) {
+    // Устанавливаем начальный стиль кнопки в зависимости от состояния
+    // if ($likeButton.attr('data-liked') === 'true') {
+    //     $likeButton.removeClass('like-active')
+    // } else {
+    //     $likeButton.addClass('like-active');
+    // }
+
+    // Обработчик клика на кнопке лайка
+    $likeButton.click(function(event) {
         event.preventDefault();
-        if (!isAuthenticated) {
-            alert('Пожалуйста, авторизуйтесь, чтобы ставить лайки.');
-            return;
+        var $this = $(this);
+        var liked = $this.attr('data-liked') === 'true';
+        var contentType = $this.data('content-type');
+        var objectId = $this.data('object-id');
+
+        // Сразу меняем состояние на клиенте
+        liked = !liked;
+        $this.attr('data-liked', liked);
+
+        // Обновляем класс кнопки
+        if (liked) {
+            $this.removeClass('like-active')
+        } else {
+            $this.addClass('like-active');
         }
 
-        liked = !liked;
-        likeButton.setAttribute('data-liked', liked);
-
-        fetch('/like/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrfToken
+        $.ajax({
+            url: "/like/",
+            method: "POST",
+            data: {
+                'content_type': contentType,
+                'object_id': objectId,
+                'liked': liked,
+                'csrfmiddlewaretoken': csrfToken
             },
-            body: JSON.stringify({
-                content_type: likeButton.getAttribute('data-content-type'),
-                object_id: likeButton.getAttribute('data-object-id')
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Response data:', data);
-            likeCount.textContent = data.like_count;
-        })
-        .catch(error => console.error('Ошибка:', error));
+            success: function(response) {
+                // Обновляем счетчик лайков
+                $('#like-count').text(response.like_count);
+            },
+            error: function(xhr, status, error) {
+                console.error("Ошибка при обработке лайка:" + status + error);
+                // Восстанавливаем предыдущее состояние в случае ошибки
+                $this.attr('data-liked', !liked);
+                if (liked) {
+                    $this.removeClass('btn-primary').addClass('btn-outline-primary');
+                } else {
+                    $this.removeClass('btn-outline-primary').addClass('btn-primary');
+                }
+            }
+        });
     });
 });

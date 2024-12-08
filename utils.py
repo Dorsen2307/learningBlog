@@ -1,6 +1,7 @@
 from datetime import timedelta
 
 from django.contrib import messages
+from django.contrib.contenttypes.models import ContentType
 from django.db.models import Case, When, BooleanField
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
@@ -10,6 +11,7 @@ from comments.forms import CommentForm
 from crafts.models import Crafts
 from drawings.models import Drawings
 from lifehacks.models import Lifehacks
+from like.models import Like
 from my_toys.models import MyToys
 from poets.models import Poets
 
@@ -84,6 +86,10 @@ def detail_view(request, item_id, item_type, template_name):
     item = get_object_or_404(model, id=item_id)
     comments = item.comments.filter(is_approved=True).order_by('-created_at')
 
+    # Получаем количество лайков для данного объекта
+    content_type = ContentType.objects.get_for_model(item)
+    like_count = Like.objects.filter(content_type=content_type, object_id=item.id).count()
+
     if request.method == 'POST':
         form = CommentForm(request.POST, user_authenticated=request.user.is_authenticated)
         if handle_comment(request, form, item):
@@ -97,6 +103,7 @@ def detail_view(request, item_id, item_type, template_name):
         'comments': comments,
         'form': form,
         'is_authenticated': request.user.is_authenticated,
+        'like_count': like_count,
     }
 
     return render(request, template_name, context)

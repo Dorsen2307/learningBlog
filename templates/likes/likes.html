@@ -1,0 +1,13 @@
+{% csrf_token %}
+<div class="d-flex align-items-center">
+    <a href="#" 
+        id="like-button" 
+        class="like-btn {% if liked %}{% else %}like-active{% endif %}" 
+        data-liked="false"
+        data-content-type="drawings"
+        data-object-id="{{ item.id }}"
+    >
+        <i class="fas fa-thumbs-up"></i>
+        <span id="like-count" class="badge fs-4">{{ like_count }}</span>
+    </a>
+</div>

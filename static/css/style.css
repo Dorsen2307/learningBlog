@@ -343,29 +343,35 @@ footer p a {
 }
 
 /* Like */
-.like-container {
-  display: flex;
-  align-items: center;
+.like-btn {
+    background-color: #007bff; /* Цвет фона */
+    color: white; /* Цвет текста */
+    border: none; /* Убираем границу */
+    border-radius: 50px; /* Скругление углов */
+    padding: 10px 20px; /* Внутренние отступы */
+    font-size: 16px; /* Размер шрифта */
+    position: relative; /* Для анимации */
+    overflow: hidden; /* Скрытие переполнения */
+    text-decoration: none;
+    transition: background-color 0.3s ease; /* Плавный переход цвета */
+}
+.like-active {
+    background-color: #28a745; /* Цвет фона при активации */
+}
+.like-btn:hover {
+    background-color: #0056b3; /* Цвет фона при наведении */
+}
+.like-active:hover {
+    background-color: #0f5132; /* Цвет фона при наведении */
+}
+.like-btn i {
+    transition: transform 0.3s ease; /* Плавный переход для иконки */
+}
+.like-active i {
+    scale: 1.1;
+    transform: scale(1.3); /* Увеличение иконки при активации */
 }
 
-.like {
-    font-size: 3rem;
-    margin-right: 10px;
-    transition: all .3s ease-in-out;
-}
-
-.like:hover {
-    background: none;
-    transform: scale(1.1);
-}
-
-.like img {
-    height: 70px;
-}
-
-.likes-count {
-  font-size: 3rem;
-}
 
 @media (max-width: 991.5px) {
     nav {

@@ -28,18 +28,7 @@
             <span class="card-subtitle d-block text-start">Дата публикации: {{ item.date_published }}</span>
         </div>
         
-        <div class="d-flex align-items-center">
-          <a href="#" 
-             id="like-button" 
-             class="btn btn-outline-primary me-2" 
-             data-liked="false"
-             data-content-type="drawing"
-             data-object-id="{{ item.id }}"
-          >
-              <img src="{% static 'img/content/like.png' %}" alt="Лайк">
-          </a>
-          <span id="like-count" class="badge bg-secondary">{{ like_count }}</span>
-        </div>
+        {% include 'likes/likes.html' with liked=liked item=item like_count=like_count %}
     </div>
     {% include 'comments/comments.html' with comments=comments form=form %}
 {% endblock %}
