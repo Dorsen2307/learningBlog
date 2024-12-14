@@ -1,13 +1,17 @@
 {% csrf_token %}
-<div class="d-flex align-items-center">
-    <a href="#" 
-        id="like-button" 
-        class="like-btn {% if liked %}{% else %}like-active{% endif %}" 
-        data-liked="false"
-        data-content-type="drawings"
-        data-object-id="{{ item.id }}"
-    >
-        <i class="fas fa-thumbs-up"></i>
-        <span id="like-count" class="badge fs-4">{{ like_count }}</span>
-    </a>
-</div>
+{% if liked == None %}
+    <p class="like-btn bg-black fs-2 text-center">Чтобы поставить лайк<br>войди или зарегистрируйся</p>
+{% else %}
+    <div class="d-flex align-items-center">
+        <a href="#" 
+            id="like-button" 
+            class="like-btn" 
+            data-liked="{{ liked }}"
+            data-content-type="{{ item_type }}"
+            data-object-id="{{ item.id }}"
+        >
+            <i class="fas fa-thumbs-up"></i>
+            <span id="like-count" class="badge fs-4">{{ like_count }}</span>
+        </a>
+    </div>
+{% endif %}

@@ -23,19 +23,20 @@ def like_view(request):
         object_id=object_id
     )
 
+    # Если можно поставить лайк
     if liked:
-        # Если лайк уже существует, удаляем его
+        # Если лайк создали, удаляем его
         if not created:
             like.delete()
-            liked = False
+            liked = 'false'
         else:
-            liked = True
+            liked = 'true'
     else:
         # Если лайка нет, создаем его
         if created:
-            liked = False
+            liked = 'false'
         else:
-            liked = True
+            liked = 'true'
             like.delete()
 
     # Получаем новое количество лайков

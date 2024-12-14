@@ -17,14 +17,5 @@
     <p class="text-full">{{ item.text }}</p>
     <div class="d-flex justify-content-between">
         <span class="date-published">Дата публикации: {{ item.date_published }}</span>
-        
-        <div class="like-container">
-          <a href="" class="like" data-model-name="toys" data-object-id="{{ item.id }}">
-              <img src="{% static 'img/content/like.png' %}" alt="Лайк">
-          </a>
-          <span class="likes-count">{{ item.like_set.count }}</span>
-        </div>
     </div>
-    
-    {% include 'comments/comments.html' with comments=comments form=form %}
 {% endblock %}

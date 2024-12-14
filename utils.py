@@ -16,12 +16,12 @@ from my_toys.models import MyToys
 from poets.models import Poets
 
 model_mapping = {
-        'drawing' : Drawings,
-        'activity' : Activities,
-        'craft' : Crafts,
-        'poet' : Poets,
-        'lifehack' : Lifehacks,
-        'toy' : MyToys,
+        'drawings' : Drawings,
+        'activities' : Activities,
+        'crafts' : Crafts,
+        'poets' : Poets,
+        'lifehacks' : Lifehacks,
+        'mytoys' : MyToys,
     }
 
 def handle_comment(request, form, instance):
@@ -71,12 +71,12 @@ def index_view(request, item_type, template_name):
 def detail_view(request, item_id, item_type, template_name):
     '''Общая функция вывода детальной информации с комментариями'''
     url_mapping = {
-        'drawing' : 'drawings:drawing_detail',
-        'activity' : 'activities:activity_detail',
-        'craft' : 'crafts:craft_detail',
-        'poet' : 'poets:poet_detail',
-        'lifehack' : 'lifehacks:lifehack_detail',
-        'toy' : 'my_toys:toy_detail',
+        'drawings' : 'drawings:drawing_detail',
+        'activities' : 'activities:activity_detail',
+        'crafts' : 'crafts:craft_detail',
+        'poets' : 'poets:poet_detail',
+        'lifehacks' : 'lifehacks:lifehack_detail',
+        'mytoys' : 'my_toys:toy_detail',
     }
 
     model = model_mapping.get(item_type)
@@ -86,9 +86,23 @@ def detail_view(request, item_id, item_type, template_name):
     item = get_object_or_404(model, id=item_id)
     comments = item.comments.filter(is_approved=True).order_by('-created_at')
 
-    # Получаем количество лайков для данного объекта
+    # Получаем количество лайков и статус для данного объекта
     content_type = ContentType.objects.get_for_model(item)
-    like_count = Like.objects.filter(content_type=content_type, object_id=item.id).count()
+    if request.user.is_authenticated:
+        like = Like.objects.filter(
+            user=request.user,
+            content_type=content_type,
+            object_id=item.id,
+        ).first()
+
+        like_count = Like.objects.filter(content_type=content_type, object_id=item.id).count()
+        if like:
+            liked = 'false'
+        else:
+            liked = 'true'
+    else:
+        liked = None
+        like_count = 0
 
     if request.method == 'POST':
         form = CommentForm(request.POST, user_authenticated=request.user.is_authenticated)
@@ -100,10 +114,12 @@ def detail_view(request, item_id, item_type, template_name):
 
     context = {
         'item': item,
+        'item_type': item_type,
         'comments': comments,
         'form': form,
         'is_authenticated': request.user.is_authenticated,
         'like_count': like_count,
+        'liked': liked,
     }
 
     return render(request, template_name, context)

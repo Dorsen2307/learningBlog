@@ -17,12 +17,18 @@
 
 {% block content %}
     <div class="text-full">{{ item.content|safe }}</div>
-    {% if item.date_crafting %}
-        <span class="card-subtitle d-block text-end">Дата изготовления: {{ item.date_crafting }}</span>
-    {% else %}
-        <span class="card-subtitle d-block text-end">Дата изготовления: неизвестно</span>
-    {% endif %}
-    <span class="card-subtitle d-block text-end">Дата публикации: {{ item.date_published }}</span>
+    <div class="d-flex justify-content-between">
+        <div class="pt-5">
+            {% if item.date_crafting %}
+                <span class="card-subtitle d-block text-start">Дата изготовления: {{ item.date_crafting }}</span>
+            {% else %}
+                <span class="card-subtitle d-block text-start">Дата изготовления: неизвестно</span>
+            {% endif %}
+            <span class="card-subtitle d-block text-start">Дата публикации: {{ item.date_published }}</span>
+        </div>
+        
+        {% include 'likes/likes.html' with liked=liked item=item item_type=item_type like_count=like_count %}
+    </div>
     
     {% include 'comments/comments.html' with comments=comments form=form %}
 {% endblock %}

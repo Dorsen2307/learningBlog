@@ -6,7 +6,9 @@
     <div class="block-last">
         <a class="last" href="{% url 'activities:index' %}"><-- Назад</a>
     </div>
-    <img class="img-toys" src="{{ item.image.image.url }}" alt="">
+    {% if item.image.image.url %}
+        <img class="img-toys" src="{{ item.image.image.url }}" alt="">
+    {% endif %}
 {% endblock %}
 
 {% block header %}
@@ -14,16 +16,11 @@
 {% endblock %}
 
 {% block content %}
-    <p class="text-full">{{ item.content }}</p>
+    <div class="text-full">{{ item.content|safe }}</div>
     <div class="d-flex justify-content-between">
         <span class="date-published">Дата публикации: {{ item.date_published }}</span>
         
-        <div class="d-flex align-items-center">
-          <a href="#" id="like-button" class="btn btn-outline-primary me-2" data-liked="false">
-              <img src="{% static 'img/content/like.png' %}" alt="Лайк">
-          </a>
-          <span id="like-count" class="badge bg-secondary">{{ item.like_set.count }}</span>
-        </div>
+        {% include 'likes/likes.html' with liked=liked item=item item_type=item_type like_count=like_count %}
     </div>
     
     {% include 'comments/comments.html' with comments=comments form=form %}

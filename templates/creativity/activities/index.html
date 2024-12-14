@@ -7,15 +7,19 @@
     {% if item_list %}
         {% for item in item_list %}
             <div class="content-line row position-relative">
-                <div class="col-xxl-3 col-xl-3 col-lg-3 col-4 image-toys">
-                    <img src="{{ item.image.image.url }}" alt="Фото">
+                <div class="col-xxl-3 col-xl-3 col-lg-3 col-4">
+                    {% if item.image.image.url %}
+                        <a href="activities/{{ item.id }}/"><img src="{{ item.image.image.url }}" alt="Фото"></a>
+                    {% else %}
+                        <p class="d-flex justify-content-center align-items-center h-100">Фото отсутствует</p>
+                    {% endif %}
                 </div>
                 <div class="col-xxl-9 col-xl-9 col-lg-9 col-8 content-details">
                     <h3 class="name">
                         <a href="activities/{{ item.id }}/">{{ item.name }}</a>
                     </h3>
-                    <p class="text">{{ item.text }}</p>
-                    <span class="date-published">Дата публикации: {{ item.date_published }}</span>
+                    <div class="flex-grow-1 fs-3" style="font-family: 'Actay-Reg', serif">{{ item.content|safe }}</div>
+                    <span class="date-published text-end">Дата публикации: {{ item.date_published }}</span>
                 </div>
                 {% if item.is_recent %}
                     <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" style="width: 12px;height: 12px;"></span>
