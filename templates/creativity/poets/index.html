@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load custom_filters %}
+
 {% block header %}<h1>Мои стишки</h1>{% endblock %}
 
 {% block content %}
@@ -36,7 +38,11 @@
                                 <div class="flex-grow-1 fs-3" style="font-family: 'Actay-Reg', serif">
                                     {{ item.content|safe }}<br>
                                 </div>
-                                <span class="date-published text-end">Дата публикации: {{ item.date_published }}</span>
+                                <div class="d-flex justify-content-between">
+                                    <span class="date-published text-end">Дата публикации: {{ item.date_published }}</span>
+                                    
+{#                                    {% include 'likes/likes.html' with liked=liked|get:item.id item=item item_type=item_type like_count=like_count|get:item.id %}#}
+                                </div>
                             </div>
                         </div>
                     </div>

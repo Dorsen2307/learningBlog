@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import Case, When, BooleanField
+from django.db.models import Case, When, BooleanField, Count
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
@@ -66,6 +66,7 @@ def index_view(request, item_type, template_name):
     ).order_by('-is_recent', '-date_published')
 
     context = {'item_list' : item_list}
+
     return render(request, template_name, context)
 
 def detail_view(request, item_id, item_type, template_name):
