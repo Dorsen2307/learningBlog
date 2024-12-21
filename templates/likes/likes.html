@@ -4,14 +4,14 @@
 {% else %}
     <div class="d-flex align-items-center">
         <a href="#" 
-            id="like-button" 
+            id="like-button-{{ item.id }}" 
             class="like-btn" 
             data-liked="{{ liked }}"
             data-content-type="{{ item_type }}"
             data-object-id="{{ item.id }}"
         >
             <i class="fas fa-thumbs-up"></i>
-            <span id="like-count" class="badge fs-4">{{ like_count }}</span>
+            <span id="like-count-{{ item.id }}" class="badge fs-4">{{ like_count }}</span>
         </a>
     </div>
 {% endif %}

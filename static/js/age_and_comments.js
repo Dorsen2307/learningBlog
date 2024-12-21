@@ -65,4 +65,55 @@ document.addEventListener("DOMContentLoaded", (event) => {
 	var age = getAge(myAge); // получаем возраст
 	// перебираем все теги img и заменяем путь на нужную фигуру
 	trueAge(age);
+
+	// Обработка пагинатора и комментариев
+	document.querySelector('#paginator-container').addEventListener('click', function(event) {
+        // Проверяем, является ли кликнутый элемент ссылкой пагинации
+        if (event.target.classList.contains('paginator-link')) {
+            event.preventDefault(); // Предотвращает переход по ссылке
+
+			const page = event.target.getAttribute('data-page'); // Получаем номер страницы
+			const itemId = event.target.getAttribute('data-item-id'); // Получаем item_id
+
+			if (!itemId) {
+				console.error('itemId не найден');
+				return; // Прерываем выполнение, если itemId отсутствует
+			}
+
+			const timestamp = new Date().getTime();
+			const url = `/drawings/drawings/${itemId}/?page=${page}&_=${timestamp}`;
+			console.log(`Запрос к URL: ${url}`);
+
+			fetch(url, {
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+				}
+			})
+			.then(response => {
+				if (!response.ok) {
+					throw new Error(`Http ошибка! Статус: ${response.status}`);
+				}
+				return response.json()
+			})
+			.then(data => {
+				// console.log(data);
+				// Обновляем комментарии
+				document.querySelector('#comments-container').innerHTML = data.comments_html;
+				// Обновляем пагинатор
+				document.querySelector('#paginator-container').innerHTML = data.paginator_html;
+
+				bindPaginatorLinks();
+			})
+			.catch(error => console.error('Error:', error));
+		}
+	});
+	function bindPaginatorLinks() {
+        document.querySelectorAll('.paginator-link').forEach(link => {
+            link.addEventListener('click', function(event) {
+                // Здесь можно добавить логику для обработки кликов
+                console.log('Клик по пагинатору:', link);
+            });
+        });
+    }
 });
+

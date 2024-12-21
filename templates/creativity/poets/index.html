@@ -10,7 +10,7 @@
         {% for item in item_list %}
             
             <div class="accordion-item position-relative">
-                <h3 class="accordion-header name">
+                <h3 class="accordion-header name"">
                     <a href="#{{ item.id }}" 
                        class="accordion-button collapsed" 
                        data-bs-toggle="collapse" 
@@ -41,7 +41,7 @@
                                 <div class="d-flex justify-content-between">
                                     <span class="date-published text-end">Дата публикации: {{ item.date_published }}</span>
                                     
-{#                                    {% include 'likes/likes.html' with liked=liked|get:item.id item=item item_type=item_type like_count=like_count|get:item.id %}#}
+                                    {% include 'likes/likes.html' with liked=item.liked item=item item_type='poets' like_count=item.like_count %}
                                 </div>
                             </div>
                         </div>

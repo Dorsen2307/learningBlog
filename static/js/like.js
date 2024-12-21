@@ -1,12 +1,15 @@
 $(document).ready(function() {
-    var $likeButton = $('#like-button');
+    var $likeButton = $('.like-btn');
 
-    // Устанавливаем начальный стиль кнопки в зависимости от состояния
-    if ($likeButton.attr('data-liked') === 'true') {
-        $likeButton.removeClass('like-active');
-    } else {
-        $likeButton.addClass('like-active');
-    }
+    // Инициализация кнопок лайк
+    $likeButton.each(function() {
+        var $this = $(this);
+        if ($this.attr('data-liked') === 'true') {
+            $this.removeClass('like-active');
+        } else {
+            $this.addClass('like-active');
+        }
+    });
 
     // Обработчик клика на кнопке лайка
     $likeButton.click(function(event) {
@@ -38,7 +41,7 @@ $(document).ready(function() {
             },
             success: function(response) {
                 // Обновляем счетчик лайков
-                $('#like-count').text(response.like_count);
+                $('#like-count-' + objectId).text(response.like_count);
             },
             error: function(xhr, status, error) {
                 console.error("Ошибка при обработке лайка:" + status + error);

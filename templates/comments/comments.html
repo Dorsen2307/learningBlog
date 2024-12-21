@@ -18,14 +18,8 @@
     {% endif %}
 
     <h2>Комментарии</h2>
-    <ul>
-        {% for comment in comments %}
-            <li>
-                <p class="comment-name">{{ comment.name }} <span class="comment-date"> ({{ comment.created_at }})</span></p>
-                <p class="comment-content">{{ comment.content }}</p>
-            </li>
-        {% empty %}
-            <li>Нет комментариев.</li>
-        {% endfor %}
-    </ul>
+    {% include 'comments/comments_partial.html' with comments=comments %}
+    
+     <!-- Пагинация -->
+    {% include 'comments/comments_paginator.html' with comments=comments %}
 </div>
