@@ -108,6 +108,8 @@ def detail_view(request, item_id, item_type, template_name):
     # # Настройка пагинации
     paginator = Paginator(comments_list, PAGE_COUNT)
     page_number = request.GET.get('page', 1)
+    is_admin = request.user.is_staff
+    print(is_admin)
 
     try:
         comments = paginator.page(page_number)
@@ -118,6 +120,14 @@ def detail_view(request, item_id, item_type, template_name):
 
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         return load_comments(request, item_id, item_type)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST, user_authenticated=request.user.is_authenticated)
+        if handle_comment(request, form, item):
+            url_name = url_mapping.get(item_type)
+            return redirect(url_name, item_id=item.id)
+    else:
+        form = CommentForm(user_authenticated=request.user.is_authenticated)
 
     # Получаем количество лайков и статус для данного объекта
     content_type = ContentType.objects.get_for_model(item)
@@ -137,14 +147,6 @@ def detail_view(request, item_id, item_type, template_name):
         liked = None
         like_count = 0
 
-    if request.method == 'POST':
-        form = CommentForm(request.POST, user_authenticated=request.user.is_authenticated)
-        if handle_comment(request, form, item):
-            url_name = url_mapping.get(item_type)
-            return redirect(url_name, item_id=item.id)
-    else:
-        form = CommentForm(user_authenticated=request.user.is_authenticated)
-
     context = {
         'item': item,
         'item_id': item.id,
@@ -154,6 +156,7 @@ def detail_view(request, item_id, item_type, template_name):
         'is_authenticated': request.user.is_authenticated,
         'like_count': like_count,
         'liked': liked,
+        'is_admin': is_admin,
     }
 
     return render(request, template_name, context)

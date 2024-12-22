@@ -1,14 +1,14 @@
-<div id="paginator-container" class="pagination">
+<div id="paginator-container" class="pagination fs-4">
     <span class="step-links">
         {% if comments.has_previous %}
             <a href="#" 
-               class="paginator-link" 
+               class="paginator-link text-decoration-none" 
                data-page="1" 
                data-item-id="{{ item_id }}" 
                data-item-type="{{ item_type }}"
             >&laquo; Первая</a>
             <a href="#" 
-               class="paginator-link" 
+               class="paginator-link text-decoration-none" 
                data-page="{{ comments.previous_page_number }}" 
                data-item-id="{{ item_id }}" 
                data-item-type="{{ item_type }}"
@@ -21,13 +21,13 @@
 
         {% if comments.has_next %}
             <a href="#" 
-               class="paginator-link" 
+               class="paginator-link text-decoration-none" 
                data-page="{{ comments.next_page_number }}" 
                data-item-id="{{ item_id }}" 
                data-item-type="{{ item_type }}"
             >Вперед</a>
             <a href="#" 
-               class="paginator-link" 
+               class="paginator-link text-decoration-none" 
                data-page="{{ comments.paginator.num_pages }}" 
                data-item-id="{{ item_id }}" 
                data-item-type="{{ item_type }}"
