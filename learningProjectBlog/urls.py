@@ -22,6 +22,7 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     path('', RedirectView.as_view(url='about/', permanent=True)),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('about/', include('about.urls')),
     path('my-toys/', include('my_toys.urls')),
     path('drawings/', include('drawings.urls')),
@@ -35,7 +36,3 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
 ]
-
-urlpatterns += [
-    path('ckeditor5/', include('django_ckeditor_5.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
