@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'poets.apps.PoetsConfig',
     'ckeditor',
     'ckeditor_uploader',
-    'watermark',
+    'information.apps.InformationConfig'
 ]
 
 MIDDLEWARE = [

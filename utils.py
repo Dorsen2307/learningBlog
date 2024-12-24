@@ -1,8 +1,11 @@
+import os
 from datetime import timedelta
+
+from PIL import Image
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.db.models import Case, When, BooleanField, Count
+from django.db.models import Case, When, BooleanField
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
@@ -15,6 +18,7 @@ from lifehacks.models import Lifehacks
 from like.models import Like
 from my_toys.models import MyToys
 from poets.models import Poets
+print(dir(Image))
 
 model_mapping = {
         'drawings' : Drawings,
@@ -105,11 +109,20 @@ def detail_view(request, item_id, item_type, template_name):
     item = get_object_or_404(model, id=item_id)
     comments_list = item.comments.filter(is_approved=True).order_by('-created_at')
 
-    # # Настройка пагинации
+    # Путь к оригинальному изображению
+    original_image_path = item.image.image.path
+    logo_path = 'static/img/logo-watermark.png'
+    output_image_path = f'static/img/content/watermark/watermarked_{item_type}_{item.id}.jpg'
+
+    # Добавляем водяной знак
+    if not os.path.exists(output_image_path):
+        add_watermark(original_image_path, logo_path, output_image_path)
+
+
+    # Настройка пагинации
     paginator = Paginator(comments_list, PAGE_COUNT)
     page_number = request.GET.get('page', 1)
     is_admin = request.user.is_staff
-    print(is_admin)
 
     try:
         comments = paginator.page(page_number)
@@ -146,9 +159,9 @@ def detail_view(request, item_id, item_type, template_name):
     else:
         liked = None
         like_count = 0
-
     context = {
         'item': item,
+        'watermarked_image': f'/{output_image_path}',
         'item_id': item.id,
         'item_type': item_type,
         'comments': comments,
@@ -158,6 +171,7 @@ def detail_view(request, item_id, item_type, template_name):
         'liked': liked,
         'is_admin': is_admin,
     }
+
 
     return render(request, template_name, context)
 
@@ -188,3 +202,36 @@ def load_comments(request, item_id, item_type):
         })
     else:
         return JsonResponse({'error' : 'Invalid request'}, status=400)
+
+def add_watermark(original_image_path, logo_path, output_image_path, position=(0, 0), transparency=128):
+    # Открываем оригинальное изображение
+    original = Image.open(original_image_path).convert("RGBA")
+
+    # Открываем изображение логотипа
+    logo = Image.open(logo_path).convert("RGBA")
+
+    # Изменяем размер логотипа, если необходимо
+    logo_size = (
+    int(original.size[0] * 0.2), int(original.size[1] * 0.12))
+    logo = logo.resize(logo_size, Image.Resampling.LANCZOS)
+
+    # Создаем изображение для водяного знака
+    watermark = Image.new("RGBA", original.size)
+
+    # Определяем позицию для логотипа
+    logo_position = (
+    original.size[0] - logo.size[0] - 50, original.size[1] - logo.size[1] - 50)  # Низкий правый угол с отступом
+
+    # Накладываем логотип на водяной знак с заданной прозрачностью
+    watermark.paste(logo, logo_position, logo)
+
+    # Объединяем оригинал и водяной знак
+    combined = Image.alpha_composite(original, watermark)
+
+    # Создание директории, если не существует
+    output_dir = os.path.dirname(output_image_path)
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    # Сохраняем результат
+    combined.convert("RGB").save(output_image_path, "JPEG")
