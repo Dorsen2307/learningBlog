@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'poets.apps.PoetsConfig',
     'ckeditor',
     'ckeditor_uploader',
-    'information.apps.InformationConfig'
+    'information.apps.InformationConfig',
+    'displaying_sections.apps.DisplayingSectionsConfig'
 ]
 
 MIDDLEWARE = [

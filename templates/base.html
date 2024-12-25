@@ -27,11 +27,9 @@
 								<li><a href="{% url 'my_toys:index' %}">Мои игрушки</a></li>
 								<li><a href="#">Творчество</a>
 									<ul>
-										<li><a href="{% url 'drawings:index' %}">Рисунки</a></li>
-										<li><a href="{% url 'crafts:index' %}">Поделки</a></li>
-										<li><a href="{% url 'lifehacks:index' %}">Lifehacks</a></li>
-										<li><a href="{% url 'activities:index' %}">Активности</a></li>
-										<li><a href="{%  url 'poets:index' %}">Стихоплёт</a></li>
+                                        {% for section in sections_list %}
+                                            <li><a href="{{ section.get_url }}">{{ section.name_section }}</a></li>
+                                        {% endfor %}
 									</ul>
 								</li>
                                 {% if user.is_authenticated %}

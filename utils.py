@@ -13,12 +13,12 @@ from django.utils import timezone
 from activities.models import Activities
 from comments.forms import CommentForm
 from crafts.models import Crafts
+from displaying_sections.models import Section
 from drawings.models import Drawings
 from lifehacks.models import Lifehacks
 from like.models import Like
 from my_toys.models import MyToys
 from poets.models import Poets
-print(dir(Image))
 
 model_mapping = {
         'drawings' : Drawings,
@@ -60,8 +60,10 @@ def handle_comment(request, form, instance):
     return False
 
 def index_view(request, item_type, template_name):
+    '''Функция вывода контента соответствующего раздела'''
     today = timezone.now()
     model = model_mapping.get(item_type)
+    sections_list = get_section()
 
     item_list = model.objects.filter(is_published=True).annotate(
         is_recent=Case(
@@ -87,7 +89,10 @@ def index_view(request, item_type, template_name):
             item.like_count = 0
             item.liked = None
 
-    context = {'item_list' : item_list}
+    context = {
+        'item_list' : item_list,
+        'sections_list' : sections_list,
+    }
 
     return render(request, template_name, context)
 
@@ -101,6 +106,7 @@ def detail_view(request, item_id, item_type, template_name):
         'lifehacks' : 'lifehacks:lifehack_detail',
         'mytoys' : 'my_toys:toy_detail',
     }
+    sections_list = get_section()
 
     model = model_mapping.get(item_type)
     if model is None:
@@ -109,15 +115,15 @@ def detail_view(request, item_id, item_type, template_name):
     item = get_object_or_404(model, id=item_id)
     comments_list = item.comments.filter(is_approved=True).order_by('-created_at')
 
-    # Путь к оригинальному изображению
-    original_image_path = item.image.image.path
-    logo_path = 'static/img/logo-watermark.png'
-    output_image_path = f'static/img/content/watermark/watermarked_{item_type}_{item.id}.jpg'
+    if item.image and item.image.image:
+        # Путь к оригинальному изображению
+        original_image_path = item.image.image.path
+        logo_path = 'static/img/logo-watermark.png'
+        output_image_path = f'static/img/content/watermark/watermarked_{item_type}_{item.id}.jpg'
 
-    # Добавляем водяной знак
-    if not os.path.exists(output_image_path):
-        add_watermark(original_image_path, logo_path, output_image_path)
-
+        # Добавляем водяной знак
+        if not os.path.exists(output_image_path):
+            add_watermark(original_image_path, logo_path, output_image_path)
 
     # Настройка пагинации
     paginator = Paginator(comments_list, PAGE_COUNT)
@@ -159,23 +165,42 @@ def detail_view(request, item_id, item_type, template_name):
     else:
         liked = None
         like_count = 0
-    context = {
-        'item': item,
-        'watermarked_image': f'/{output_image_path}',
-        'item_id': item.id,
-        'item_type': item_type,
-        'comments': comments,
-        'form': form,
-        'is_authenticated': request.user.is_authenticated,
-        'like_count': like_count,
-        'liked': liked,
-        'is_admin': is_admin,
-    }
+
+    if item.image and item.image.image:
+        context = {
+            'item': item,
+            'watermarked_image': f'/{output_image_path}',
+            'item_id': item.id,
+            'item_type': item_type,
+            'comments': comments,
+            'form': form,
+            'is_authenticated': request.user.is_authenticated,
+            'like_count': like_count,
+            'liked': liked,
+            'is_admin': is_admin,
+            'sections_list': sections_list,
+        }
+    else:
+        context = {
+            'item': item,
+            'item_id': item.id,
+            'item_type': item_type,
+            'comments': comments,
+            'form': form,
+            'is_authenticated': request.user.is_authenticated,
+            'like_count': like_count,
+            'liked': liked,
+            'is_admin': is_admin,
+            'sections_list': sections_list,
+        }
+
+
 
 
     return render(request, template_name, context)
 
 def load_comments(request, item_id, item_type):
+    '''Загружает комментарии и пагинацию'''
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         model = model_mapping.get(item_type)
         item = get_object_or_404(model, id=item_id)
@@ -204,6 +229,7 @@ def load_comments(request, item_id, item_type):
         return JsonResponse({'error' : 'Invalid request'}, status=400)
 
 def add_watermark(original_image_path, logo_path, output_image_path, position=(0, 0), transparency=128):
+    '''Функция накладывает водяной знак на оригинальное изображение и сохраняет'''
     # Открываем оригинальное изображение
     original = Image.open(original_image_path).convert("RGBA")
 
@@ -235,3 +261,8 @@ def add_watermark(original_image_path, logo_path, output_image_path, position=(0
 
     # Сохраняем результат
     combined.convert("RGB").save(output_image_path, "JPEG")
+
+def get_section():
+    sections_list = Section.objects.filter(is_active=True)
+
+    return sections_list

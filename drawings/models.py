@@ -1,7 +1,9 @@
+import PIL
 from ckeditor.fields import RichTextField
 from django.db import models
 from django.utils import timezone
 from media.models import Image
+from PIL import Image as PILImage
 
 
 class Drawings(models.Model):

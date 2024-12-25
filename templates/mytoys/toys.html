@@ -7,7 +7,7 @@
         <a class="last" href="{% url 'my_toys:index' %}"><-- Назад</a>
     </div>
     {% if item.image.image.url %}
-        <img class="img-toys" src="{{ item.image.image.url }}" alt="">
+        <img class="img-toys" src="{{ watermarked_image }}" alt="">
     {% endif %}
 {% endblock %}
 

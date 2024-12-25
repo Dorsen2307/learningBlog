@@ -7,7 +7,7 @@
         <a class="last" href="{% url 'lifehacks:index' %}"><-- Назад</a>
     </div>
     <div class="row">
-        <img class="img-drawing col-12 p-0" src="{{ item.image.image.url }}" alt="{{ item.name }}">
+        <img class="img-drawing col-12 p-0" src="{{ watermarked_image }}" alt="{{ item.name }}">
     </div>
 {% endblock %}
 
