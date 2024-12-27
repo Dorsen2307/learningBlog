@@ -14,6 +14,10 @@
         <label for="id_password" class="fs-3">Пароль:</label>
         <input type="password" name="password" class="form-control w-25 fs-3" id="id_password" required>
     </div>
+    
+    <div class="pt-3">
+        <a class="fs-3 text-decoration-none" href="{% url 'password_reset' %}">Сброс пароля</a>
+    </div>
 
     <button type="submit" class="btn btn-primary fs-3 mt-4">Войти</button>
 </form>

@@ -149,3 +149,10 @@ LOGOUT_REDIRECT_URL = 'about:index'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'sergedoroshenk@yandex.ru'
+EMAIL_HOST_PASSWORD = 'Tyjntu2008'
+DEFAULT_FROM_EMAIL = 'sergedoroshenk@gmail.com'
