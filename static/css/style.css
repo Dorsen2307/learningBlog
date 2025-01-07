@@ -162,7 +162,7 @@ a:hover {
 
 /* Main */
 .main {
-  background: url(../../img/main/bg.jpg) center bottom no-repeat;
+  background: url(../main/bg.jpg) center bottom no-repeat;
   background-size: cover;
 }
 .main-header {

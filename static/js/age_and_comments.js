@@ -17,14 +17,14 @@ function trueAge(age) {
 	const opac = 0; //прозрачность невидимого изображения
 	//массив информации об изображениях
 	const images = [
-		{id: 1, range:[0, 3], src: mediaPath + 'main/1.png'},
-		{id: 2, range:[3, 7], src: mediaPath + 'main/2.png'},
-		{id: 3, range:[7, 17], src: mediaPath + 'main/3.png'},
-		{id: 4, range:[17, 26], src: mediaPath + 'main/4.png'},
-		{id: 5, range:[26, 41], src: mediaPath + 'main/5.png'},
-		{id: 6, range:[41, 51], src: mediaPath + 'main/6.png'},
-		{id: 7, range:[51, 61], src: mediaPath + 'main/7.png'},
-		{id: 8, range:[61, Infinity], src: mediaPath + 'main/8.png'},
+		{id: 1, range:[0, 3], src: staticPath + 'main/1.png'},
+		{id: 2, range:[3, 7], src: staticPath + 'main/2.png'},
+		{id: 3, range:[7, 17], src: staticPath + 'main/3.png'},
+		{id: 4, range:[17, 26], src: staticPath + 'main/4.png'},
+		{id: 5, range:[26, 41], src: staticPath + 'main/5.png'},
+		{id: 6, range:[41, 51], src: staticPath + 'main/6.png'},
+		{id: 7, range:[51, 61], src: staticPath + 'main/7.png'},
+		{id: 8, range:[61, Infinity], src: staticPath + 'main/8.png'},
 	];
 
 	images.forEach(image => {
