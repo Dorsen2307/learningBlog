@@ -2,7 +2,7 @@
 
 {% load custom_filters %}
 
-{% block header %}<h1>Мои стишки</h1>{% endblock %}
+{% block header %}<h1 class="header-content">Мои стишки</h1>{% endblock %}
 
 {% block content %}
     {% if item_list %}
@@ -27,9 +27,9 @@
                 >
                     <div class="accordion-body">
                         <div class="row h-100">
-                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-4">
+                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
                                 {% if item.image.image.url %}
-                                    <img class="img-fluid" src="{{ item.image.image.url }}" alt="Фото">
+                                    <img class="img-fluid accord-img" src="{{ item.image.image.url }}" alt="Фото">
                                 {% else %}
                                     <p class="d-flex justify-content-center align-items-center h-100">Фото отсутствует</p>
                                 {% endif %}
@@ -38,10 +38,14 @@
                                 <div class="flex-grow-1 fs-3" style="font-family: 'Actay-Reg', serif">
                                     {{ item.content|safe }}<br>
                                 </div>
-                                <div class="d-flex justify-content-between">
-                                    <span class="date-published text-end">Дата публикации: {{ item.date_published }}</span>
+                                <div class="row like-poet">
+                                    <div class="col-xxl-10 col-xl-10 col-lg-10 col-md-9 col-sm-8 col-8 p-0">
+                                        <span class="date-published text-end">Дата публикации: {{ item.date_published }}</span>
+                                    </div>
                                     
-                                    {% include 'likes/likes.html' with liked=item.liked item=item item_type='poets' like_count=item.like_count %}
+                                    <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-4 col-4 p-0 like-b">
+                                        {% include 'likes/likes.html' with liked=item.liked item=item item_type='poets' like_count=item.like_count %}
+                                    </div>
                                 </div>
                             </div>
                         </div>

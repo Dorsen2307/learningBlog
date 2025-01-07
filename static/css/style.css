@@ -34,50 +34,84 @@ li {
 nav {
   font-size: 2rem;
 }
+/*nav ul ul {*/
+/*  list-style: none;*/
+/*  position: relative;*/
+/*}*/
+/*nav ul li ul {*/
+/*  display: none; !* Скрываем меню по умолчанию *!*/
+/*}*/
+/*nav ul li a {*/
+/*    display: inline-block;*/
+/*}*/
+/*nav ul li:active > ul li {*/
+/*  !*display: block;*!*/
+/*  z-index: 10;*/
+/*}*/
+/*nav ul li:hover > ul {*/
+/*    display: block;*/
+/*}*/
+/*nav ul li:active > ul li {*/
+/*    display: block;*/
+/*    opacity: 100%;*/
+/*}*/
+/*nav ul li:active > ul li:nth-child(1) {*/
+/*  top: 0;*/
+/*}*/
+/*nav ul li:active > ul li:nth-child(2) {*/
+/*  top: 40px;*/
+/*}*/
+/*nav ul li:active > ul li:nth-child(3) {*/
+/*  top: 80px;*/
+/*}*/
+/*nav ul li:active > ul li:nth-child(4) {*/
+/*  top: 120px;*/
+/*}*/
+/*nav ul li:active > ul li:nth-child(5) {*/
+/*  top: 160px;*/
+/*}*/
+
+/*nav ul ul li {*/
+/*  display: none;*/
+/*  position: absolute;*/
+/*  top: -50px;*/
+/*  left: 0;*/
+/*  opacity: 0;*/
+/*  -webkit-transition: top 0.3s cubic-bezier(0.44, 1.61, 0.75, 0.84) 0.2s, opacity 0.2s linear 0.2s;*/
+/*  transition: top 0.3s cubic-bezier(0.44, 1.61, 0.75, 0.84) 0.2s, opacity 0.2s linear 0.2s;*/
+/*}*/
+
+.dropdown-menu {
+    font-size: 2rem;
+    border: none;
+    background: none;
+}
+.dropdown-menu li {
+    margin-bottom: 10px;
+}
 nav ul {
-  list-style: none;
-  position: relative;
+    list-style: none;
 }
 nav ul li {
-  /*display: inline-block;*/
+    position: relative;
 }
-nav ul li a {
-    display: inline-block;
+nav ul li ul {
+    display: none; /* Скрываем подменю по умолчанию */
+    position: absolute; /* Устанавливаем позицию подменю */
+    top: 40px; /* Показываем подменю под родительским элементом */
+    left: 0;
+    z-index: 1000; /* Обеспечиваем, чтобы подменю было поверх других элементов */
 }
-nav ul li:hover > ul {
-  z-index: 10;
+nav ul li.active > ul {
+    display: block; /* Показываем подменю, если родительский элемент активен */
 }
-nav ul li:hover > ul li {
-  opacity: 100%;
-}
-nav ul li:hover > ul li:nth-child(1) {
-  top: 0;
-}
-nav ul li:hover > ul li:nth-child(2) {
-  top: 40px;
-}
-nav ul li:hover > ul li:nth-child(3) {
-  top: 80px;
-}
-nav ul li:hover > ul li:nth-child(4) {
-  top: 120px;
-}
-nav ul li:hover > ul li:nth-child(5) {
-  top: 160px;
-}
-nav ul ul li {
-  position: absolute;
-  top: -50px;
-  left: 0;
-  opacity: 0;
-  -webkit-transition: top 0.3s cubic-bezier(0.44, 1.61, 0.75, 0.84) 0.2s, opacity 0.2s linear 0.2s;
-  transition: top 0.3s cubic-bezier(0.44, 1.61, 0.75, 0.84) 0.2s, opacity 0.2s linear 0.2s;
-}
+
 nav ul ul li a {
   white-space: nowrap;
   /*line-height: 2;*/
   padding: 4px 10px;
 }
+
 nav a {
   border: 3px solid #5bdcdc;
   border-radius: 10px;
@@ -128,43 +162,54 @@ a:hover {
 
 /* Main */
 .main {
-  background: url(../img/main/bg.jpg) center bottom no-repeat;
+  background: url(../../img/main/bg.jpg) center bottom no-repeat;
   background-size: cover;
 }
 .main-header {
-  padding: 50px 0;
+  /*padding: 50px 0;*/
 }
 .main-logo {
-  display: inline-block;
+  /*display: inline-block;*/
 }
 .main-age {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  /*display: -webkit-box;*/
+  /*display: -ms-flexbox;*/
+  /*display: flex;*/
+  /*-webkit-box-pack: justify;*/
+  /*    -ms-flex-pack: justify;*/
+  /*        justify-content: space-between;*/
+  /*-webkit-box-align: end;*/
+  /*    -ms-flex-align: end;*/
+  /*        align-items: flex-end;*/
+  margin-left: 25%;
+  padding-top: 100px;
 }
-.main-age img {
-  height: 100%;
+.about-photo {
+    height: 300px;
 }
-.content {
-  padding: 1px 0;
-  background-color: #1fbc23;
-  min-height: 400px;
+.header-content {
+    font-family: 'Architun-Med', serif;
+    font-size: 6rem;
+}
+.card-title {
+    font-size: 3rem;
+}
+.card-subtitle {
+    font-size: 1.5rem;
+}
+.card-body {
+    padding-top: 5px;
+    line-height: 2.2;
 }
 .content h1 {
   /*font-size: 5rem;*/
-  text-transform: uppercase;
-  padding-bottom: 30px;
-  font-family: 'Architun-Med', serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 6rem;
-  line-height: 0.8;
+  /*text-transform: uppercase;*/
+  /*padding-bottom: 30px;*/
+  /*font-family: 'Architun-Med', serif;*/
+  /*font-weight: 400;*/
+  /*font-style: normal;*/
+  /*font-size: 6rem;*/
+  /*line-height: 0.8;*/
 }
 .content .about-text {
   font-size: 2.5rem;
@@ -172,14 +217,14 @@ a:hover {
   font-family: 'Actay-Reg', serif;
 }
 .content .img-thumbnail, .content .img-toys {
-  height: 30rem;
-  float: left;
-  margin-right: 30px;
-  margin-bottom: 20px;
+  /*height: 30rem;*/
+  /*float: left;*/
+  /*margin-right: 30px;*/
+  /*margin-bottom: 20px;*/
 }
 footer {
   height: 350px;
-  background: #1fbc23 url(../img/footer/bg1.png) center no-repeat;
+  background: #1fbc23 url(../../img/footer/bg1.png) left no-repeat;
   background-size: cover;
 }
 /*footer p {*/
@@ -191,7 +236,7 @@ footer p a {
   font-weight: bold;
 }
 .container {
-    min-width: 728px;
+    /*min-width: 728px;*/
 }
 
 /* My Toys */
@@ -200,7 +245,7 @@ footer p a {
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 15px;
-    margin-bottom: 20px;
+    margin-top: 20px;
     font-family: 'Actay-Reg', serif;
 }
 
@@ -246,7 +291,7 @@ footer p a {
 
 .date-published {
     font-size: 1.2rem;
-    color: #888;
+    /*color: #888;*/
     margin-top: auto;
 }
 
@@ -369,8 +414,57 @@ footer p a {
 }
 
 
-@media (max-width: 991.5px) {
-    nav {
-        margin-top: 15px;
+@media (max-width: 992px) {
+    .nav-mt {
+        margin-top: 20px;
+    }
+}
+
+/* Применяем медиа-запросы для экранов менее 768px */
+@media (max-width: 768px) {
+    html {
+        /*font-size: 7px;*/
+    }
+    .logo {
+        display: none;
+    }
+    nav ul {
+        flex-direction: column;
+    }
+    nav ul li {
+        margin-bottom: 25px;
+    }
+    .login, .logout {
+        margin-right: auto;
+    }
+    .main-age {
+        padding: 0;
+    }
+    .about-photo {
+        display: none;
+    }
+    .name {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    html {
+        font-size: 7px;
+    }
+    .container {
+        padding: 0 20px;
+    }
+    .accord-img {
+        display: none;
+    }
+}
+
+@media (max-width: 305px) {
+    .like-poet {
+        flex-direction: column;
+    }
+    .like-b {
+        width: 85px;
     }
 }

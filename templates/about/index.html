@@ -1,18 +1,21 @@
 {% extends 'base.html' %}
 
-{% block header %}<h1>Обо мне</h1>{% endblock %}
-
-
 {% block image %}
-    <div class="content-about">
-    {% if photo %}
-        <img class="img-thumbnail" src="{{ photo }}" alt="">
-    {% endif %}
+    <div class="row">
+        <div class="col-auto">
+        {% if photo %}
+            <img class="img-thumbnail float-start me-4 mb-4 about-photo" src="{{ photo }}" alt="">
+        {% endif %}
+{% endblock %}
+
+{% block header %}
+            <h1 class="align-text-bottom header-content">Обо мне</h1>
 {% endblock %}
 
 {% block content %}
-        <div class="about-text">
-            {{ content|safe }}
+            <div class="" style="font-size: 2.5rem; text-align: justify; font-family: 'Actay-Reg', serif;">
+                {{ content|safe }}
+            </div>
         </div>
     </div>
 {% endblock %}

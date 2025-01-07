@@ -7,12 +7,12 @@
         <a class="last" href="{% url 'my_toys:index' %}"><-- Назад</a>
     </div>
     {% if item.image.image.url %}
-        <img class="img-toys" src="{{ watermarked_image }}" alt="">
+        <img class="img-toys w-100" src="{{ item.image.image.url }}" alt="">
     {% endif %}
 {% endblock %}
 
 {% block header %}
-    <h1>{{ item.name }}</h1>
+    <h1 class="header-content mt-3">{{ item.name }}</h1>
 {% endblock %}
 
 {% block content %}

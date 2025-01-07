@@ -134,10 +134,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR,'staticroot')
+# STATIC_ROOT = os.path.join(BASE_DIR,'static/')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+MEDIA_URL = '/img/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'img/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -155,4 +158,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'sergedoroshenk@yandex.ru'
 EMAIL_HOST_PASSWORD = 'Tyjntu2008'
-DEFAULT_FROM_EMAIL = 'sergedoroshenk@gmail.com'
+DEFAULT_FROM_EMAIL = 'sergedoroshenk@yandex.ru'

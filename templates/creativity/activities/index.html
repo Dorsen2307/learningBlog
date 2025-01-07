@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
 
-{% block header %}<h1>Я активная!</h1>{% endblock %}
+{% block header %}<h1 class="header-content">Я активная!</h1>{% endblock %}
 
 {% block content %}
     <div class="content-about">
     {% if item_list %}
         {% for item in item_list %}
             <div class="content-line row position-relative">
-                <div class="col-xxl-3 col-xl-3 col-lg-3 col-4">
+                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-0">
                     {% if item.image.image.url %}
-                        <a href="activities/{{ item.id }}/"><img src="{{ item.image.image.url }}" alt="Фото"></a>
+                        <a href="activities/{{ item.id }}/"><img class="w-100" src="{{ item.image.image.url }}" alt="Фото"></a>
                     {% else %}
                         <p class="d-flex justify-content-center align-items-center h-100">Фото отсутствует</p>
                     {% endif %}
                 </div>
-                <div class="col-xxl-9 col-xl-9 col-lg-9 col-8 content-details">
+                <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-9 col-12 content-details">
                     <h3 class="name">
                         <a href="activities/{{ item.id }}/">{{ item.name }}</a>
                     </h3>

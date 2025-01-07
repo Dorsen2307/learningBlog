@@ -2,7 +2,7 @@
     {% for comment in comments %}
         <li>
             <p class="comment-name">{{ comment.name }} 
-                {% if is_admin %} <span style="color: red; font-size: 12px"><i>(админ)</i></span>{% endif %} 
+{#                {% if is_admin %} <span style="color: red; font-size: 12px"><i>(админ)</i></span>{% endif %} #}
                 <span class="comment-date"> ({{ comment.created_at }})</span></p>
             <p class="comment-content">{{ comment.content }}</p>
         </li>

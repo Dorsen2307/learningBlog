@@ -1,6 +1,6 @@
 import os
 from datetime import timedelta
-
+from django.conf import settings
 from PIL import Image
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
@@ -28,7 +28,7 @@ model_mapping = {
         'lifehacks' : Lifehacks,
         'mytoys' : MyToys,
     }
-PAGE_COUNT = 10 # Кол-во постов на странице в комментариях
+PAGE_COUNT = 3 # Кол-во постов на странице в комментариях
 
 def handle_comment(request, form, instance):
     '''Обработка и привязка комментария к посту'''
@@ -92,6 +92,7 @@ def index_view(request, item_type, template_name):
     context = {
         'item_list' : item_list,
         'sections_list' : sections_list,
+	    'MEDIA_URL' : settings.MEDIA_URL,
     }
 
     return render(request, template_name, context)
@@ -115,15 +116,15 @@ def detail_view(request, item_id, item_type, template_name):
     item = get_object_or_404(model, id=item_id)
     comments_list = item.comments.filter(is_approved=True).order_by('-created_at')
 
-    if item.image and item.image.image:
-        # Путь к оригинальному изображению
-        original_image_path = item.image.image.path
-        logo_path = 'static/img/logo-watermark.png'
-        output_image_path = f'static/img/content/watermark/watermarked_{item_type}_{item.id}.jpg'
-
-        # Добавляем водяной знак
-        if not os.path.exists(output_image_path):
-            add_watermark(original_image_path, logo_path, output_image_path)
+    # if item.image and item.image.image:
+    #     # Путь к оригинальному изображению
+    #     original_image_path = item.image.image.path
+    #     logo_path = 'static/img/logo-watermark.png'
+    #     output_image_path = f'static/img/content/watermark/watermarked_{item_type}_{item.id}.jpg'
+    #
+    #     # Добавляем водяной знак
+    #     if not os.path.exists(output_image_path):
+    #         add_watermark(original_image_path, logo_path, output_image_path)
 
     # Настройка пагинации
     paginator = Paginator(comments_list, PAGE_COUNT)
@@ -166,33 +167,34 @@ def detail_view(request, item_id, item_type, template_name):
         liked = None
         like_count = 0
 
-    if item.image and item.image.image:
-        context = {
-            'item': item,
-            'watermarked_image': f'/{output_image_path}',
-            'item_id': item.id,
-            'item_type': item_type,
-            'comments': comments,
-            'form': form,
-            'is_authenticated': request.user.is_authenticated,
-            'like_count': like_count,
-            'liked': liked,
-            'is_admin': is_admin,
-            'sections_list': sections_list,
-        }
-    else:
-        context = {
-            'item': item,
-            'item_id': item.id,
-            'item_type': item_type,
-            'comments': comments,
-            'form': form,
-            'is_authenticated': request.user.is_authenticated,
-            'like_count': like_count,
-            'liked': liked,
-            'is_admin': is_admin,
-            'sections_list': sections_list,
-        }
+    # if item.image and item.image.image:
+    #     context = {
+    #         'item': item,
+    #         'watermarked_image': f'/{output_image_path}',
+    #         'item_id': item.id,
+    #         'item_type': item_type,
+    #         'comments': comments,
+    #         'form': form,
+    #         'is_authenticated': request.user.is_authenticated,
+    #         'like_count': like_count,
+    #         'liked': liked,
+    #         'is_admin': is_admin,
+    #         'sections_list': sections_list,
+    #     }
+    # else:
+    context = {
+        'item': item,
+        'item_id': item.id,
+        'item_type': item_type,
+        'comments': comments,
+        'form': form,
+        'is_authenticated': request.user.is_authenticated,
+        'like_count': like_count,
+        'liked': liked,
+        'is_admin': is_admin,
+        'sections_list': sections_list,
+	    'MEDIA_URL' : settings.MEDIA_URL,
+    }
 
 
 

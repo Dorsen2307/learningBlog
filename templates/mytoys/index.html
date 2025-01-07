@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
-{% block header %}<h1>Мои любимые игрушки</h1>{% endblock %}
+{% block header %}<h1 class="header-content">Мои любимые игрушки</h1>{% endblock %}
 
 {% block content %}
     <div class="content-about">
     {% if item_list %}
         {% for item in item_list %}
             <div class="content-line row position-relative">
-                <div class="col-xxl-3 col-xl-3 col-lg-3 col-4">
+                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-0">
                     <a href="toys/{{ item.id }}/"><img class="w-100" src="{{ item.image.image.url }}" alt="Фото"></a>
                 </div>
-                <div class="col-xxl-9 col-xl-9 col-lg-9 col-8 content-details">
+                <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-9 col-12 content-details">
                     <h3 class="name">
                         {% if item.image.image.url %}
                             <a class="p-1 border" href="toys/{{ item.id }}/">{{ item.name }}</a>

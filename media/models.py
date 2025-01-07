@@ -13,7 +13,7 @@ class Image(models.Model):
     ]
 
     def get_upload_to(self, filename):
-        return f'static/img/content/{self.category}/{filename}'
+        return f'img/content/{self.category}/{filename}'
 
     category = models.CharField(max_length=10, choices=CATEGORY, verbose_name='Категория')
     image = models.ImageField(upload_to=get_upload_to, verbose_name='Изображение')
