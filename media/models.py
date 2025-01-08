@@ -29,10 +29,3 @@ class Image(models.Model):
     class Meta:
         verbose_name_plural = 'Изображения'
 
-    def delete(self, *args, **kwargs):
-        print(f"Deleting image: {self.image.path}")
-        # Удаляем файл изображения, если он существует
-        storage, path = self.image.storage, self.image.path
-        # Удаляем объект модели
-        super(Image, self).delete(*args, **kwargs)
-        storage.delete(path)

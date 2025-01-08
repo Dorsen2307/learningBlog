@@ -3,6 +3,7 @@ from datetime import timedelta
 from django.conf import settings
 from PIL import Image
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Case, When, BooleanField
@@ -108,6 +109,7 @@ def detail_view(request, item_id, item_type, template_name):
         'mytoys' : 'my_toys:toy_detail',
     }
     sections_list = get_section()
+    admins = User.objects.filter(is_staff=True)
 
     model = model_mapping.get(item_type)
     if model is None:
@@ -129,7 +131,6 @@ def detail_view(request, item_id, item_type, template_name):
     # Настройка пагинации
     paginator = Paginator(comments_list, PAGE_COUNT)
     page_number = request.GET.get('page', 1)
-    is_admin = request.user.is_staff
 
     try:
         comments = paginator.page(page_number)
@@ -137,6 +138,12 @@ def detail_view(request, item_id, item_type, template_name):
         comments = paginator.page(1)
     except EmptyPage:
         comments = paginator.page(paginator.num_pages)
+
+    for comment in comments:
+        for admin in admins:
+            if comment.name == admin.username:
+                comment.is_admin = True
+                break
 
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         return load_comments(request, item_id, item_type)
@@ -191,7 +198,6 @@ def detail_view(request, item_id, item_type, template_name):
         'is_authenticated': request.user.is_authenticated,
         'like_count': like_count,
         'liked': liked,
-        'is_admin': is_admin,
         'sections_list': sections_list,
 	    'MEDIA_URL' : settings.MEDIA_URL,
     }
@@ -206,11 +212,18 @@ def load_comments(request, item_id, item_type):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         model = model_mapping.get(item_type)
         item = get_object_or_404(model, id=item_id)
+        admins = User.objects.filter(is_staff=True)
         comments_list = item.comments.filter(is_approved=True).order_by('-created_at')
         paginator = Paginator(comments_list, PAGE_COUNT)  # Показывать PAGE_COUNT комментариев на странице
 
         page_number = request.GET.get('page')
         comments = paginator.get_page(page_number)
+
+        for comment in comments:
+            for admin in admins:
+                if comment.name == admin.username:
+                    comment.is_admin = True
+                    break
 
         comments_html = render_to_string('comments/comments_partial.html', {'comments': comments})
         paginator_html = render_to_string('comments/comments_paginator.html', {

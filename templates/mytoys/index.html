@@ -21,13 +21,13 @@
                     <div class="text">{{ item.content|safe }}</div>
                     <span class="date-published text-end">Дата публикации: {{ item.date_published }}</span>
                 </div>
-                {% if my_toys.is_recent %}
+                {% if item.is_recent %}
                     <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" style="width: 12px;height: 12px;"></span>
                 {% endif %}
             </div>
         {% endfor %}
     {% else %}
-        <p class="about-text">Этот раздел пока в разработке!</p>
+        <p class="fs-2">Этот раздел пока в разработке!</p>
     {% endif %}
     </div>
 {% endblock %}

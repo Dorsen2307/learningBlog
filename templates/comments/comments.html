@@ -3,7 +3,11 @@
     <form method="post">
         {% csrf_token %}
         {% if is_authenticated %}
-            <p class="fs-3">Имя: <span class="fw-bold">{{ request.user.username }}</span></p>
+            <p class="fs-3">Имя: 
+                <span class="fw-bold">
+                    {{ request.user.username }}
+                </span>
+            </p>
         {% else %}
             {{ form.name }}<br>
         {% endif %}
