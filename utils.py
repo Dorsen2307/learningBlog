@@ -16,6 +16,7 @@ from comments.forms import CommentForm
 from crafts.models import Crafts
 from displaying_sections.models import Section
 from drawings.models import Drawings
+from information.models import Info
 from lifehacks.models import Lifehacks
 from like.models import Like
 from my_toys.models import MyToys
@@ -65,6 +66,7 @@ def index_view(request, item_type, template_name):
     today = timezone.now()
     model = model_mapping.get(item_type)
     sections_list = get_section()
+    info_list = get_info()
 
     item_list = model.objects.filter(is_published=True).annotate(
         is_recent=Case(
@@ -93,6 +95,7 @@ def index_view(request, item_type, template_name):
     context = {
         'item_list' : item_list,
         'sections_list' : sections_list,
+        'info_list' : info_list,
 	    'MEDIA_URL' : settings.MEDIA_URL,
     }
 
@@ -109,6 +112,7 @@ def detail_view(request, item_id, item_type, template_name):
         'mytoys' : 'my_toys:toy_detail',
     }
     sections_list = get_section()
+    info_list = get_info()
     admins = User.objects.filter(is_staff=True)
 
     model = model_mapping.get(item_type)
@@ -189,6 +193,7 @@ def detail_view(request, item_id, item_type, template_name):
     #         'sections_list': sections_list,
     #     }
     # else:
+    print(info_list)
     context = {
         'item': item,
         'item_id': item.id,
@@ -199,6 +204,7 @@ def detail_view(request, item_id, item_type, template_name):
         'like_count': like_count,
         'liked': liked,
         'sections_list': sections_list,
+        'info_list': info_list,
 	    'MEDIA_URL' : settings.MEDIA_URL,
     }
 
@@ -281,3 +287,8 @@ def get_section():
     sections_list = Section.objects.filter(is_active=True)
 
     return sections_list
+
+def get_info():
+    info_list = Info.objects.filter(is_published=True)
+
+    return info_list

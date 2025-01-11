@@ -154,8 +154,11 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'sergedoroshenk@yandex.ru'
-EMAIL_HOST_PASSWORD = 'Tyjntu2008'
+EMAIL_PORT = 465
+# EMAIL_USE_TLS = True
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'sergedoroshenk'
+EMAIL_HOST_PASSWORD = 'wclvuezafjjweenq'
 DEFAULT_FROM_EMAIL = 'sergedoroshenk@yandex.ru'
+SERVER_EMAIL = 'sergedoroshenk@yandex.ru'
+EMAIL_ADMIN = 'sergedoroshenk@yandex.ru'
