@@ -31,56 +31,11 @@ li {
   margin: 0;
   padding: 0;
 }
+
+/* Navigation */
 nav {
   font-size: 2rem;
 }
-/*nav ul ul {*/
-/*  list-style: none;*/
-/*  position: relative;*/
-/*}*/
-/*nav ul li ul {*/
-/*  display: none; !* Скрываем меню по умолчанию *!*/
-/*}*/
-/*nav ul li a {*/
-/*    display: inline-block;*/
-/*}*/
-/*nav ul li:active > ul li {*/
-/*  !*display: block;*!*/
-/*  z-index: 10;*/
-/*}*/
-/*nav ul li:hover > ul {*/
-/*    display: block;*/
-/*}*/
-/*nav ul li:active > ul li {*/
-/*    display: block;*/
-/*    opacity: 100%;*/
-/*}*/
-/*nav ul li:active > ul li:nth-child(1) {*/
-/*  top: 0;*/
-/*}*/
-/*nav ul li:active > ul li:nth-child(2) {*/
-/*  top: 40px;*/
-/*}*/
-/*nav ul li:active > ul li:nth-child(3) {*/
-/*  top: 80px;*/
-/*}*/
-/*nav ul li:active > ul li:nth-child(4) {*/
-/*  top: 120px;*/
-/*}*/
-/*nav ul li:active > ul li:nth-child(5) {*/
-/*  top: 160px;*/
-/*}*/
-
-/*nav ul ul li {*/
-/*  display: none;*/
-/*  position: absolute;*/
-/*  top: -50px;*/
-/*  left: 0;*/
-/*  opacity: 0;*/
-/*  -webkit-transition: top 0.3s cubic-bezier(0.44, 1.61, 0.75, 0.84) 0.2s, opacity 0.2s linear 0.2s;*/
-/*  transition: top 0.3s cubic-bezier(0.44, 1.61, 0.75, 0.84) 0.2s, opacity 0.2s linear 0.2s;*/
-/*}*/
-
 .dropdown-menu {
     font-size: 2rem;
     border: none;
@@ -105,13 +60,11 @@ nav ul li ul {
 nav ul li.active > ul {
     display: block; /* Показываем подменю, если родительский элемент активен */
 }
-
 nav ul ul li a {
   white-space: nowrap;
   /*line-height: 2;*/
   padding: 4px 10px;
 }
-
 nav a {
   border: 3px solid #5bdcdc;
   border-radius: 10px;
@@ -159,31 +112,14 @@ a:hover {
 }
 
 
-
 /* Main */
 .main {
   background: url(../main/bg.jpg) center bottom no-repeat;
   background-size: cover;
 }
-.main-header {
-  /*padding: 50px 0;*/
-}
-.main-logo {
-  /*display: inline-block;*/
-}
 img.main-age {
-  /*display: -webkit-box;*/
-  /*display: -ms-flexbox;*/
-  /*display: flex;*/
-  /*-webkit-box-pack: justify;*/
-  /*    -ms-flex-pack: justify;*/
-  /*        justify-content: space-between;*/
-  /*-webkit-box-align: end;*/
-  /*    -ms-flex-align: end;*/
-  /*        align-items: flex-end;*/
-  margin-left: 25%;
+    margin-left: 25%;
     vertical-align: baseline;
-  /*padding-top: 100px;*/
 }
 .about-photo {
     height: 300px;
@@ -202,45 +138,24 @@ img.main-age {
     padding-top: 5px;
     line-height: 2.2;
 }
-.content h1 {
-  /*font-size: 5rem;*/
-  /*text-transform: uppercase;*/
-  /*padding-bottom: 30px;*/
-  /*font-family: 'Architun-Med', serif;*/
-  /*font-weight: 400;*/
-  /*font-style: normal;*/
-  /*font-size: 6rem;*/
-  /*line-height: 0.8;*/
-}
 .content .about-text {
   font-size: 2.5rem;
   text-align: justify;
   font-family: 'Actay-Reg', serif;
-}
-.content .img-thumbnail, .content .img-toys {
-  /*height: 30rem;*/
-  /*float: left;*/
-  /*margin-right: 30px;*/
-  /*margin-bottom: 20px;*/
 }
 footer {
   height: 350px;
   background: #1fbc23 url(../../img/footer/bg1.png) left no-repeat;
   background-size: cover;
 }
-/*footer p {*/
-/*  font-size: 2rem;*/
-/*}*/
 footer p a {
   text-decoration: none;
   color: #000;
   font-weight: bold;
 }
-.container {
-    /*min-width: 728px;*/
-}
 
-/* My Toys */
+
+/* Content */
 .content-line {
     background: white;
     border-radius: 8px;
@@ -249,11 +164,9 @@ footer p a {
     margin-top: 20px;
     font-family: 'Actay-Reg', serif;
 }
-
 .image-toys {
     height: 100%;
 }
-
 .image-toys img {
     display: flex;
     height: 100%;
@@ -263,20 +176,17 @@ footer p a {
     align-items: flex-start;
     margin-right: auto;
 }
-
 .content-details {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
 }
-
 .name a {
     text-decoration: none;
     font-size: 2.5rem;
     font-family: 'Actay-Reg', serif;
 }
-
 .text {
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -289,10 +199,11 @@ footer p a {
     flex-grow: 1;
     text-align: justify;
 }
-
+.text p {
+    text-indent: 40px;
+}
 .date-published {
     font-size: 1.2rem;
-    /*color: #888;*/
     margin-top: auto;
 }
 
@@ -313,7 +224,9 @@ footer p a {
     color: #000;
     text-align: justify;
 }
-
+.text-full p{
+    text-indent: 40px;
+}
 .block-last {
     display: block;
     padding-bottom: 10px;
@@ -374,8 +287,6 @@ footer p a {
 }
 .slide {
     height: 100%;
-    /*display: flex;*/
-    /*align-items: center;*/
     padding: 0 45px;
 }
 .slide a:hover {
@@ -438,7 +349,7 @@ footer p a {
     padding: 5px;
 }
 .form-name, .form-comment {
-    width: 500px;
+    width: 400px;
     margin-bottom: 10px;
     font-size: 1.5rem;
     border-radius: 3px;
@@ -527,6 +438,9 @@ footer p a {
     }
     .accord-img {
         display: none;
+    }
+    .form-name, .form-comment {
+        width: 100%;
     }
 }
 

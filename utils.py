@@ -30,7 +30,7 @@ model_mapping = {
         'lifehacks' : Lifehacks,
         'mytoys' : MyToys,
     }
-PAGE_COUNT = 3 # Кол-во постов на странице в комментариях
+PAGE_COUNT = 10 # Кол-во постов на странице в комментариях
 
 def handle_comment(request, form, instance):
     '''Обработка и привязка комментария к посту'''
@@ -193,7 +193,6 @@ def detail_view(request, item_id, item_type, template_name):
     #         'sections_list': sections_list,
     #     }
     # else:
-    print(info_list)
     context = {
         'item': item,
         'item_id': item.id,
